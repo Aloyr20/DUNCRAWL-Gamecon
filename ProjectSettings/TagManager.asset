@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Knife
   - Dummy
+  - ShopKeeper
   layers:
   - Default
   - TransparentFX

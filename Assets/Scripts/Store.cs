@@ -5,7 +5,7 @@ public class Store : MonoBehaviour
 {
     public Inventory _inv;
 
-    public GameObject _store;
+    
 
     bool _ableInteractive;
     // Start is called once before the first execution of Update after the MonoBehaviour is created

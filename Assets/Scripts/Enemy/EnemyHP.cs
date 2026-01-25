@@ -26,7 +26,6 @@ public class EnemyHP : MonoBehaviour
     bool isDead;
 
     public float DissolveTime = 3f;
-    private bool isDissolving = false;
 
     GameObject mesh;
     public Material dissolveMaterial;
@@ -178,7 +177,6 @@ public class EnemyHP : MonoBehaviour
     public IEnumerator StartDissolving()
     {
         {
-            isDissolving = true;
             SetDissolveRate(0);
 
             float time = 0;
@@ -191,7 +189,6 @@ public class EnemyHP : MonoBehaviour
             }
 
             SetDissolveRate(1);
-            isDissolving = false;
         }
     }
 

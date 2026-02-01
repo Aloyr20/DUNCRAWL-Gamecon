@@ -23,32 +23,5 @@ public class Store : MonoBehaviour
 
 
 
-    public void sRed()
-    {
-        _inv.sRed++;
-    }
-   public void sBlue()
-    {
-        _inv.sBlue++;
-    }
-
-    public void sPurple()
-    {
-        _inv.sPurple++;
-    }
-
-    public void bRed()
-    {
-        _inv.bRed++;
-    }
-
-    public void bBlue()
-    {
-        _inv.bBlue++;
-    }
-
-    public void bPurple()
-    {
-        _inv.bPurple++;
-    }
+    
 }

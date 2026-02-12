@@ -1,54 +1,63 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Store : MonoBehaviour
 {
     public Inventory _inv;
+    private StoreTrigger _storeTrigger;
 
-    
-
-    bool _ableInteractive;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _storeTrigger = Object.FindFirstObjectByType<StoreTrigger>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-       
-        
-
+        if (_inv == null)
+        {
+            _inv = Object.FindFirstObjectByType<Inventory>();
+        }
+        if (_storeTrigger == null)
+        {
+            _storeTrigger = Object.FindFirstObjectByType<StoreTrigger>();
+        }
     }
 
-
+    void PurchaseItem(System.Action purchaseAction)
+    {
+        if (_storeTrigger != null && _storeTrigger._storeOpen && _inv != null)
+        {
+            purchaseAction();
+            _inv.UpdateAllNumbers();
+        }
+    }
 
     public void sRed()
     {
-        _inv.sRed++;
+        PurchaseItem(() => _inv.sRed++);
     }
-   public void sBlue()
+
+    public void sBlue()
     {
-        _inv.sBlue++;
+        PurchaseItem(() => _inv.sBlue++);
     }
 
     public void sPurple()
     {
-        _inv.sPurple++;
+        PurchaseItem(() => _inv.sPurple++);
     }
 
     public void bRed()
     {
-        _inv.bRed++;
+        PurchaseItem(() => _inv.bRed++);
     }
 
     public void bBlue()
     {
-        _inv.bBlue++;
+        PurchaseItem(() => _inv.bBlue++);
     }
 
     public void bPurple()
     {
-        _inv.bPurple++;
+        PurchaseItem(() => _inv.bPurple++);
     }
 }

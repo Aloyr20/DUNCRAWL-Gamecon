@@ -1,50 +1,93 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class StoreTrigger : MonoBehaviour
 {
-
     public GameObject _storeBlock;
+    public Dialogue shopkeeperDialogue;
+    public DialogueManager dialogueManager;
 
-    public bool _ableInteractive = false;
-    public bool _ableInventory =true;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public bool _storeOpen = false;
+    public bool _inShopRange = false;
+
+    bool _waitingForStore = false;
+
+    private Inventory _inventory;
+
     void Start()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E) && _ableInteractive == true)
+        _inventory = Object.FindFirstObjectByType<Inventory>();
+        if (_storeBlock != null)
         {
-            _ableInventory = !_ableInventory;
-            _storeBlock.SetActive(!_storeBlock.activeSelf);
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            _storeBlock.SetActive(false);
         }
     }
 
-    
+    void Update()
+    {
+        if (_waitingForStore && !dialogueManager.IsDialogueActive())
+        {
+            OpenStore();
+            _waitingForStore = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) && _inShopRange && !_storeOpen)
+        {
+            if (!dialogueManager.IsDialogueActive() && !_inventory.IsInventoryOpen())
+            {
+                dialogueManager.StartDialogue(shopkeeperDialogue);
+                _waitingForStore = true;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && _storeOpen)
+        {
+            CloseStore();
+        }
+    }
+
+    void OpenStore()
+    {
+        _storeOpen = true;
+        if (_storeBlock != null)
+        {
+            _storeBlock.SetActive(true);
+        }
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    void CloseStore()
+    {
+        _storeOpen = false;
+        if (_storeBlock != null)
+        {
+            _storeBlock.SetActive(false);
+            dialogueManager.EnableGame();
+            Time.timeScale = 1f;
+        }
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        _waitingForStore = false;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("ShopKeeper"))
-       {
-            _ableInteractive = true;
-       }
+        if (other.CompareTag("ShopKeeper"))
+        {
+            _inShopRange = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("ShopKeeper"))
         {
-
-            _ableInteractive = false;
+            _inShopRange = false;
+            if (_storeOpen)
+            {
+                CloseStore();
+            }
+            _waitingForStore = false;
         }
     }
 }
-
-
-

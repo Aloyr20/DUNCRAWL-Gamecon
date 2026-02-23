@@ -25688,15 +25688,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e51aa233988ae64eb99722605a04745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Inventory
-  _inventory: {fileID: 248298590}
+  _inventory: {fileID: 722082799}
   _store: {fileID: 411501720}
   _dialogueManager: {fileID: 1676790848}
-  sRed: 0
-  sBlue: 0
-  sPurple: 0
-  bRed: 0
-  bBlue: 0
-  bPurple: 0
   _numOwn:
   - {fileID: 500066634}
   - {fileID: 1196617885}
@@ -25719,6 +25713,8 @@ MonoBehaviour:
   _storeBlock: {fileID: 824239623}
   shopkeeperDialogue: {fileID: 2058779774}
   dialogueManager: {fileID: 1676790848}
+  _ableInteractive: 0
+  _ableInventory: 1
   _storeOpen: 0
   _inShopRange: 0
 --- !u!1 &415056039
@@ -34902,7 +34898,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8605093205120092894, guid: 356844831ebea654d879315e5ab4b38f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.31
+      value: 0.155
       objectReference: {fileID: 0}
     - target: {fileID: 8605093205120092894, guid: 356844831ebea654d879315e5ab4b38f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -86703,7 +86699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 684ff47c97eb9c147bdb28d9d0dec432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Store
-  _inv: {fileID: 411501719}
+  _inv: {fileID: 0}
 --- !u!1 &1501945827
 GameObject:
   m_ObjectHideFlags: 0
@@ -94595,7 +94591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9dd70c4d1ac3444aa6d4046c4bb959, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BrewsControllor
-  SS: {fileID: 589690631}
+  SS: {fileID: 0}
   itemIcon:
   - {fileID: 1767120952, guid: aa00b4a5e7d737f4292f7e4ca7c63483, type: 3}
   - {fileID: 462160164, guid: b12c83412f1a0824cb5bfcc159cd92d4, type: 3}

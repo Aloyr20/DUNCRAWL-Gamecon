@@ -19,6 +19,7 @@ public class StoreTrigger : MonoBehaviour
     void Start()
     {
         _inventory = Object.FindFirstObjectByType<Inventory>();
+        dialogueManager = FindFirstObjectByType<DialogueManager>();
         if (_storeBlock != null)
         {
             _storeBlock.SetActive(false);
@@ -42,8 +43,6 @@ public class StoreTrigger : MonoBehaviour
             }
         }
 
-
-
         if (Input.GetKeyDown(KeyCode.Escape) && _storeOpen)
         {
             CloseStore();
@@ -55,13 +54,9 @@ public class StoreTrigger : MonoBehaviour
         _storeOpen = true;
         if (_storeBlock != null)
         {
-            if (Input.GetKeyDown(KeyCode.E) && _ableInteractive == true)
-            {
-                _ableInventory = !_ableInventory;
-                _storeBlock.SetActive(!_storeBlock.activeSelf);
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
+            _storeBlock.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 
@@ -84,6 +79,7 @@ public class StoreTrigger : MonoBehaviour
         if (other.CompareTag("ShopKeeper"))
         {
             _ableInteractive = true;
+            _inShopRange = true;
         }
     }
 
@@ -96,6 +92,7 @@ public class StoreTrigger : MonoBehaviour
                 CloseStore();
             }
             _ableInteractive = false;
+            _inShopRange = false;
         }
     }
 }

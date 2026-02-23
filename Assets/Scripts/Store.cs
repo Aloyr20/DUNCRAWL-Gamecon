@@ -2,5 +2,7 @@ using UnityEngine;
 
 public class Store : MonoBehaviour
 {
-    bool _ableInteractive = false;
+    public Inventory _inv;
+
+    bool _ableInteractive;
 }

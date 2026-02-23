@@ -20,9 +20,6 @@ public class SlotSpawn : MonoBehaviour
 
     void Start()
     {
-
-
-
         slotUis = new SlotUi[slotCount];
 
         for (int i = 0; i < slotCount; i++)

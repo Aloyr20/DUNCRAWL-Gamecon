@@ -6,6 +6,9 @@ public class StoreTrigger : MonoBehaviour
     public Dialogue shopkeeperDialogue;
     public DialogueManager dialogueManager;
 
+    public bool _ableInteractive = false;
+    public bool _ableInventory = true;
+
     public bool _storeOpen = false;
     public bool _inShopRange = false;
 
@@ -30,7 +33,7 @@ public class StoreTrigger : MonoBehaviour
             _waitingForStore = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && _inShopRange && !_storeOpen)
+        if (Input.GetKeyDown(KeyCode.E) && _inShopRange && !_storeOpen )
         {
             if (!dialogueManager.IsDialogueActive() && !_inventory.IsInventoryOpen())
             {
@@ -38,6 +41,8 @@ public class StoreTrigger : MonoBehaviour
                 _waitingForStore = true;
             }
         }
+
+
 
         if (Input.GetKeyDown(KeyCode.Escape) && _storeOpen)
         {
@@ -50,10 +55,14 @@ public class StoreTrigger : MonoBehaviour
         _storeOpen = true;
         if (_storeBlock != null)
         {
-            _storeBlock.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.E) && _ableInteractive == true)
+            {
+                _ableInventory = !_ableInventory;
+                _storeBlock.SetActive(!_storeBlock.activeSelf);
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
         }
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
     }
 
     void CloseStore()
@@ -74,7 +83,7 @@ public class StoreTrigger : MonoBehaviour
     {
         if (other.CompareTag("ShopKeeper"))
         {
-            _inShopRange = true;
+            _ableInteractive = true;
         }
     }
 
@@ -82,12 +91,11 @@ public class StoreTrigger : MonoBehaviour
     {
         if (other.CompareTag("ShopKeeper"))
         {
-            _inShopRange = false;
             if (_storeOpen)
             {
                 CloseStore();
             }
-            _waitingForStore = false;
+            _ableInteractive = false;
         }
     }
 }

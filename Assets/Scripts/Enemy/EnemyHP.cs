@@ -6,9 +6,11 @@ using UnityEngine.AI;
 public class EnemyHP : MonoBehaviour
 {
     public enum SpellType { None, Ice, Fire, Poison }
+    public bool spellDamage;
     public Slider healthBar;
     public float maxHealth = 200f;
     public float currentHealth;
+
 
     public float originalSpeed;
     private EnemyAi ai;

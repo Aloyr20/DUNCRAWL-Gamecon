@@ -5,6 +5,7 @@ public class StoreTrigger : MonoBehaviour
     public GameObject _storeBlock;
     public Dialogue shopkeeperDialogue;
     public DialogueManager dialogueManager;
+    public TurnScript turnScript;
 
     public bool _ableInteractive = false;
     public bool _ableInventory = true;
@@ -52,6 +53,7 @@ public class StoreTrigger : MonoBehaviour
     void OpenStore()
     {
         _storeOpen = true;
+        turnScript.enabled = false;
         if (_storeBlock != null)
         {
             _storeBlock.SetActive(true);
@@ -63,6 +65,7 @@ public class StoreTrigger : MonoBehaviour
     void CloseStore()
     {
         _storeOpen = false;
+        turnScript.enabled = true;
         if (_storeBlock != null)
         {
             _storeBlock.SetActive(false);

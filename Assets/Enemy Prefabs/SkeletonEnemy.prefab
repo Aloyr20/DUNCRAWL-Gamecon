@@ -975,6 +975,7 @@ SkinnedMeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
@@ -1189,7 +1190,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.25
+      scalar: 0.5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1360,7 +1361,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.4
+      scalar: 0.65
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -5889,7 +5890,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &2556012050059069952
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5935,6 +5936,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -5966,7 +5968,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!1 &6266953217319862561
 GameObject:
   m_ObjectHideFlags: 0
@@ -6408,6 +6409,7 @@ MonoBehaviour:
   distanceFromPlayer: 0
   AttackRange: 2.5
   AttackCooldown: 2
+  damage: 0
 --- !u!195 &8819271700381097359
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -6464,4 +6466,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a73e08613004e16479a13ed4ed5f82a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spellDamage: 0
   healthBar: {fileID: 6920432380159196183}
+  maxHealth: 200
+  currentHealth: 0
+  originalSpeed: 0
+  barSmoothTime: 0.1
+  DissolveTime: 3
+  dissolveMaterial: {fileID: 0}
+  levelClearController: {fileID: 0}

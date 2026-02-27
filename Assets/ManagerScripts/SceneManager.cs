@@ -18,14 +18,17 @@ public class SceneController : MonoBehaviour
 
     public void LoadScene(string sceneName)
     {
+        music[1].Play();
         music[0].Stop();
 
         //Load the scene
         SceneManager.LoadScene(sceneName);
+
     }
 
     public void QuitButton()
     {
+        music[1].Play();
 #if UNITY_EDITOR
 
         UnityEditor.EditorApplication.isPlaying = false;

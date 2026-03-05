@@ -5,11 +5,12 @@ using UnityEditor;
 #endif
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Unity.VectorGraphics;
 
 public class SceneController : MonoBehaviour
 {
     public List<string> _sceneNames;
-    public AudioSource [] music;
+    public AudioSource[] music;
 
     public void Start()
     {
@@ -38,5 +39,12 @@ public class SceneController : MonoBehaviour
         Application.Quit();
 
 #endif
+    }
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            SceneManager.LoadScene("Game");
+        }
     }
 }

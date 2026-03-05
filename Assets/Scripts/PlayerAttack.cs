@@ -18,17 +18,21 @@ public class PlayerAttack : MonoBehaviour
 
     bool stopSlash = true;
 
+    public AudioSource sourceSwing;
+    public AudioSource sourceHit;
+    public AudioClip[] sound;
+
+
     void Start()
     {
         AnimatorStateInfo info = SwordAnim.GetCurrentAnimatorStateInfo(0);
         currentstate = GetCurrentStateName(info);
     }
 
-    
+
     void Update()
     {
         AnimatorStateInfo info = SwordAnim.GetCurrentAnimatorStateInfo(0);
-
 
         if (Input.GetMouseButtonDown(0) && stopSlash)
         {
@@ -47,6 +51,10 @@ public class PlayerAttack : MonoBehaviour
         if ((info.IsName(currentstate) == false) && GetCurrentStateName(info) == "Slash")
         {
             //just started slashing
+            if (!sourceSwing.isPlaying)
+            {
+                sourceSwing.PlayOneShot(sound[0], 1.5f);
+            }
             EnemyDetermine();
 
         }
@@ -70,6 +78,10 @@ public class PlayerAttack : MonoBehaviour
 
         foreach (Collider enemy in _enemies)
         {
+            if (!sourceHit.isPlaying)
+            {
+                sourceHit.PlayOneShot(sound[1], 1.4f);
+            }
             if (enemy.name == "Dummy")
             {
                 enemy.GetComponent<DummyEnemy>().TakeDamage();

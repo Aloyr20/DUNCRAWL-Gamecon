@@ -11,7 +11,6 @@ public class EnemyHP : MonoBehaviour
     public float maxHealth = 200f;
     public float currentHealth;
 
-
     public float originalSpeed;
     private EnemyAi ai;
 

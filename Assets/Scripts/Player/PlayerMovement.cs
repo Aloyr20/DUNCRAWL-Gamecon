@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
@@ -38,6 +40,18 @@ public class PlayerMovement : MonoBehaviour
     private bool slopeExit;
 
     public MovementState state;
+
+    public AudioSource source;
+    public float footstepsCooldown;
+    public float footstepsDuration;
+    public bool footstepsPlaying;
+
+    public float speedSampleTime;
+    bool readyToSample;
+    Vector3 oldPosition;
+    float lastSavedSpeed;
+    public float speedThreshold;
+
     public enum MovementState
     {
         walking,
@@ -50,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Dagger"), true);
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-        
+
     }
 
     void Update()
@@ -60,6 +74,9 @@ public class PlayerMovement : MonoBehaviour
         SpeedController();
         PlayerState();
         SprintBarUpdate();
+
+        StartCoroutine(VelocityToSpeed());
+        StartCoroutine(Footsteps());
 
         staminaBar.value = currentStam;
 
@@ -141,11 +158,11 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(moveDir.normalized * moveS * 10f * inAirMulti, ForceMode.Force);
         }
 
-        if(PlayerOnSlope() && !slopeExit)
+        if (PlayerOnSlope() && !slopeExit)
         {
             rb.AddForce(PlayerMoveDirSlope() * moveS * 20f, ForceMode.Force);
 
-            if(rb.linearVelocity.y > 0)
+            if (rb.linearVelocity.y > 0)
             {
                 rb.AddForce(Vector3.down * 80f, ForceMode.Force);
             }
@@ -157,7 +174,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool PlayerOnSlope()
     {
-        if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, heightOfPlayer * 0.5f + 0.3f))
+        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, heightOfPlayer * 0.5f + 0.3f))
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             return angle < maxSlope && angle != 0;
@@ -168,7 +185,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 PlayerMoveDirSlope()
     {
-        return Vector3.ProjectOnPlane(moveDir,slopeHit.normal).normalized;
+        return Vector3.ProjectOnPlane(moveDir, slopeHit.normal).normalized;
     }
 
     private void SpeedController()
@@ -203,6 +220,41 @@ public class PlayerMovement : MonoBehaviour
     {
         slopeExit = false;
         jumpable = true;
+    }
+
+    public IEnumerator Footsteps()
+    {
+        if (onGround && Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        {
+            if (!source.isPlaying)
+            {
+                source.Play();
+                yield return new WaitForSeconds(footstepsDuration);
+            }
+        }
+
+        else
+        {
+            source.Stop();
+            StopCoroutine(Footsteps());
+        }
+    }
+
+
+    public IEnumerator VelocityToSpeed()
+    {
+        if (readyToSample)
+        {
+            readyToSample = false;
+
+            yield return new WaitForSeconds(speedSampleTime);
+
+            lastSavedSpeed = Mathf.Abs((transform.position - oldPosition).magnitude);
+
+            oldPosition = transform.position;
+
+            readyToSample = true;
+        }
     }
 
 }

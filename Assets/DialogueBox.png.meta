@@ -100,13 +100,13 @@ TextureImporter:
       name: DialogueBox_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 1
-        width: 147
+        width: 148
         height: 91
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 37, y: 36, z: 36, w: 36}
       customData: 
       outline: []
       physicsShape: []

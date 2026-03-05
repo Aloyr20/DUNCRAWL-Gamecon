@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
@@ -11,6 +12,17 @@ public class PlayerHealth : MonoBehaviour
     float t = 0f;
     float startValue;
     float targetValue;
+
+    public Transform canvasTransform;
+    public GameObject screenBleedPanel;
+    public float screenBleedDuration;
+    public int maxBleedLayers;
+    int currentBleedLayers;
+
+    private void Start()
+    {
+        screenBleedPanel.SetActive(false);
+    }
 
     void Awake()
     {
@@ -27,6 +39,8 @@ public class PlayerHealth : MonoBehaviour
         {
             health = 0;
             healthBar.value = 0;
+            StopAllCoroutines();
+            DestroyBleedPanels();
             levelClearController.Lose();
             return;
         }
@@ -44,10 +58,11 @@ public class PlayerHealth : MonoBehaviour
     {
         health -= dmg;
         health = Mathf.Clamp(health, 0, health);
-
         startValue = healthBar.value;
         targetValue = health;
         t = 0f;
+
+        StartCoroutine(StartScreenBleed());
     }
 
     public void GiveHP(int hp)
@@ -59,4 +74,35 @@ public class PlayerHealth : MonoBehaviour
         targetValue = health;
         t = 0f;
     }
+
+    public IEnumerator StartScreenBleed()
+    {
+        if (currentBleedLayers < maxBleedLayers)
+        {
+            currentBleedLayers++;
+
+            GameObject spawnedBleedLayer = Instantiate(screenBleedPanel, canvasTransform);
+
+            spawnedBleedLayer.SetActive(true);
+
+            yield return new WaitForSeconds(screenBleedDuration);
+
+            Destroy(spawnedBleedLayer);
+
+            currentBleedLayers--;
+        }
+    }
+
+    public void DestroyBleedPanels()
+    {
+        foreach (Transform bleedPanel in canvasTransform)
+        {
+            if (bleedPanel.name.Contains(screenBleedPanel.name))
+            {
+                Destroy(bleedPanel.gameObject);
+            }
+        }
+        currentBleedLayers = 0;
+    }
+
 }

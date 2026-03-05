@@ -25819,6 +25819,12 @@ MonoBehaviour:
   fireCooldown: 10
   poisonCooldown: 15
   swapCooldown: 1
+  lastIceTime: -999
+  lastFireTime: -999
+  lastPoisonTime: -999
+  lastSwapTime: -999
+  currentCooldownLeft: 0
+  cooldownReadyPrinted: 0
   currentSpell: 0
 --- !u!114 &411501718
 MonoBehaviour:
@@ -46159,31 +46165,31 @@ PrefabInstance:
     - target: {fileID: 5601048107869432569, guid: 939cb2b0ea1829f4ab94b56d2ddf82ef, type: 3}
       propertyPath: iceSprite
       value: 
-      objectReference: {fileID: -45409162, guid: 46dd69806b61ba04a867ade073a2e2e1, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 5601048107869432569, guid: 939cb2b0ea1829f4ab94b56d2ddf82ef, type: 3}
       propertyPath: spellIcon
       value: 
-      objectReference: {fileID: 2029630293}
+      objectReference: {fileID: 0}
     - target: {fileID: 5601048107869432569, guid: 939cb2b0ea1829f4ab94b56d2ddf82ef, type: 3}
       propertyPath: fireSprite
       value: 
-      objectReference: {fileID: -1039129147, guid: d63d070e0ce3ef043aced8ce2846fe70, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 5601048107869432569, guid: 939cb2b0ea1829f4ab94b56d2ddf82ef, type: 3}
       propertyPath: poisonSprite
       value: 
-      objectReference: {fileID: -1787972294, guid: cbcb5e4a9dfe4ff4a813baa6240b0af0, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 5601048107869432569, guid: 939cb2b0ea1829f4ab94b56d2ddf82ef, type: 3}
       propertyPath: iceCooldownFill
       value: 
-      objectReference: {fileID: 618163348}
+      objectReference: {fileID: 0}
     - target: {fileID: 5601048107869432569, guid: 939cb2b0ea1829f4ab94b56d2ddf82ef, type: 3}
       propertyPath: fireCooldownFill
       value: 
-      objectReference: {fileID: 1074192316}
+      objectReference: {fileID: 0}
     - target: {fileID: 5601048107869432569, guid: 939cb2b0ea1829f4ab94b56d2ddf82ef, type: 3}
       propertyPath: poisonCooldownFill
       value: 
-      objectReference: {fileID: 874554458}
+      objectReference: {fileID: 0}
     - target: {fileID: 5753895497676682828, guid: 939cb2b0ea1829f4ab94b56d2ddf82ef, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -61877,14 +61883,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fdc581c5adc80b418d31e160ffd7c8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewSpellUIController
-  spellIcon: {fileID: 2029630293}
-  cooldownMask: {fileID: 1074192316}
-  iceSprite: {fileID: 1278575914, guid: bd9ff72fe15ec0d4c99157c461107bbb, type: 3}
-  fireSprite: {fileID: -989022467, guid: 49aac3003085f1f4a81d2bf4301bd3de, type: 3}
-  poisonSprite: {fileID: -1233040289, guid: c21c029568e945d4aa904defa1cdb7d9, type: 3}
+  baseGrey: {fileID: 2029630293}
+  iceFill: {fileID: 618163348}
+  fireFill: {fileID: 1074192316}
+  poisonFill: {fileID: 874554458}
   iceCooldown: 3
   fireCooldown: 2
   poisonCooldown: 4
+  defaultSpell: 1
 --- !u!1 &972178408
 GameObject:
   m_ObjectHideFlags: 0

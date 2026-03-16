@@ -66,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Dagger"), true);
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        Time.timeScale = 1f;
 
     }
 
@@ -76,6 +77,12 @@ public class PlayerMovement : MonoBehaviour
         SpeedController();
         PlayerState();
         SprintBarUpdate();
+
+
+        if (Input.GetKey(KeyCode.V))
+        {
+            Debug.Log(Time.timeScale);
+        }
 
         StartCoroutine(VelocityToSpeed());
         StartCoroutine(Footsteps());

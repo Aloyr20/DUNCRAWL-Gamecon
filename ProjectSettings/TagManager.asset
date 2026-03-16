@@ -22,9 +22,9 @@ TagManager:
   - Enemy
   - PlayerShot
   - Dummy
-  - 
-  - 
-  - 
+  - Barrels
+  - Projectile
+  - Weapons
   - 
   - 
   - 

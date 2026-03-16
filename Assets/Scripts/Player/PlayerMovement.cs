@@ -52,6 +52,8 @@ public class PlayerMovement : MonoBehaviour
     float lastSavedSpeed;
     public float speedThreshold;
 
+    public TurnScript camScript;
+
     public enum MovementState
     {
         walking,
@@ -116,17 +118,23 @@ public class PlayerMovement : MonoBehaviour
             state = MovementState.sprinting;
             moveS = sprintS;
             sprinting = true;
+            camScript.IsRunning = true;
+            camScript.IsWalking = false;
         }
         else if (onGround)
         {
             state = MovementState.walking;
             moveS = walkS;
             sprinting = false;
+            camScript.IsRunning = false;
+            camScript.IsWalking = true;
         }
         else
         {
             state = MovementState.air;
             sprinting = false;
+            camScript.IsRunning = false;
+            camScript.IsWalking = false;
         }
     }
 

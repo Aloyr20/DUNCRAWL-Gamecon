@@ -25276,6 +25276,7 @@ MonoBehaviour:
   footstepsPlaying: 0
   speedSampleTime: 0.2
   speedThreshold: 38.99
+  camScript: {fileID: 872683468}
 --- !u!114 &411501715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54619,6 +54620,10 @@ MonoBehaviour:
   MouseSensitivity: 4
   TurnSpeed: 50
   LookDir: {fileID: 664562237}
+  CamBobAmp: 0.05
+  CamBobSpd: 5
+  IsWalking: 1
+  IsRunning: 0
 --- !u!114 &872683469
 MonoBehaviour:
   m_ObjectHideFlags: 0

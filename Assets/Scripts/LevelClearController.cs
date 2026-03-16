@@ -13,6 +13,7 @@ public class LevelClearController : MonoBehaviour
     public LutController lutController;
     public TurnScript turn;
     public SceneController audioTrack;
+    public PlayerHealth bleedPanel;
 
     private void Start()
     {
@@ -78,9 +79,10 @@ public class LevelClearController : MonoBehaviour
 
     public void Win()
     {
+        bleedPanel.StopAllCoroutines();
+        bleedPanel.DestroyBleedPanels();
         Time.timeScale = 0f;
         turn.GetComponent<TurnScript>().enabled = false;
-        Cursor.lockState = CursorLockMode.Confined;
         WinScreen.SetActive(true);
     }
 
@@ -88,7 +90,6 @@ public class LevelClearController : MonoBehaviour
     {
         Time.timeScale = 0f;
         turn.GetComponent<TurnScript>().enabled = false;
-        Cursor.lockState = CursorLockMode.Confined;
         LoseScreen.SetActive(true);
     }
 }

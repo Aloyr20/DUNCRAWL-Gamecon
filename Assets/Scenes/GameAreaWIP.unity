@@ -189,59 +189,59 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.422
+      value: -1.294
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.050000187
+      value: -0.05
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.982
+      value: -5.991
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.1379498
+      value: 0.7071068
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.1379498
+      value: -0.7071068
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.6935199
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.6935199
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -7511558181221131132, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 290302798976daa41869c61894448f2d, type: 2}
-    - target: {fileID: 919132149155446097, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: 919132149155446097, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_Name
-      value: Duncrawl Cell Structure (1)
+      value: Duncrawl ToiletSink (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
 --- !u!1001 &66216446
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -445,7 +445,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &198932655
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -557,7 +557,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &244819275
 Transform:
   m_ObjectHideFlags: 0
@@ -713,6 +713,69 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fc87655ad1d835c4b87b9cfd6b13dd01, type: 3}
   m_PrefabInstance: {fileID: 254876850}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &265399605
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: fc87655ad1d835c4b87b9cfd6b13dd01, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.3393974
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fc87655ad1d835c4b87b9cfd6b13dd01, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.25000054
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fc87655ad1d835c4b87b9cfd6b13dd01, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 33.495625
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fc87655ad1d835c4b87b9cfd6b13dd01, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fc87655ad1d835c4b87b9cfd6b13dd01, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fc87655ad1d835c4b87b9cfd6b13dd01, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fc87655ad1d835c4b87b9cfd6b13dd01, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fc87655ad1d835c4b87b9cfd6b13dd01, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fc87655ad1d835c4b87b9cfd6b13dd01, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fc87655ad1d835c4b87b9cfd6b13dd01, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fc87655ad1d835c4b87b9cfd6b13dd01, type: 3}
+      propertyPath: m_Name
+      value: Duncrawl Cell Empty NoDoor (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: -9187118736188260247, guid: fc87655ad1d835c4b87b9cfd6b13dd01, type: 3}
+    - {fileID: 4287654377458783319, guid: fc87655ad1d835c4b87b9cfd6b13dd01, type: 3}
+    - {fileID: 1876136437826666261, guid: fc87655ad1d835c4b87b9cfd6b13dd01, type: 3}
+    - {fileID: -948260321536062257, guid: fc87655ad1d835c4b87b9cfd6b13dd01, type: 3}
+    - {fileID: 8984980601660352025, guid: fc87655ad1d835c4b87b9cfd6b13dd01, type: 3}
+    - {fileID: -4446185593833241190, guid: fc87655ad1d835c4b87b9cfd6b13dd01, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fc87655ad1d835c4b87b9cfd6b13dd01, type: 3}
 --- !u!1 &273022150
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,7 +794,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &273022151
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -937,7 +1000,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: d2d68a0bd49b19c4daaaa4f47f5c6170, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 0360950f7ae569a41a1bfc705ae1859a, type: 2}
+      objectReference: {fileID: 2100000, guid: 1a7edcb69ab62d449a29dac70f4e2610, type: 2}
     - target: {fileID: 919132149155446097, guid: d2d68a0bd49b19c4daaaa4f47f5c6170, type: 3}
       propertyPath: m_Name
       value: Duncrawl Bedframe (11)
@@ -1027,7 +1090,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &331421844
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1388,7 +1451,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &368990154
 Transform:
   m_ObjectHideFlags: 0
@@ -1622,7 +1685,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &383161274
 Transform:
   m_ObjectHideFlags: 0
@@ -1734,7 +1797,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &386817855
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1846,7 +1909,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &440343237
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1958,7 +2021,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &443546394
 Transform:
   m_ObjectHideFlags: 0
@@ -2221,7 +2284,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: d2d68a0bd49b19c4daaaa4f47f5c6170, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 0360950f7ae569a41a1bfc705ae1859a, type: 2}
+      objectReference: {fileID: 2100000, guid: 1a7edcb69ab62d449a29dac70f4e2610, type: 2}
     - target: {fileID: 919132149155446097, guid: d2d68a0bd49b19c4daaaa4f47f5c6170, type: 3}
       propertyPath: m_Name
       value: Duncrawl Bedframe (5)
@@ -2404,7 +2467,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: d2d68a0bd49b19c4daaaa4f47f5c6170, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 0360950f7ae569a41a1bfc705ae1859a, type: 2}
+      objectReference: {fileID: 2100000, guid: 1a7edcb69ab62d449a29dac70f4e2610, type: 2}
     - target: {fileID: 919132149155446097, guid: d2d68a0bd49b19c4daaaa4f47f5c6170, type: 3}
       propertyPath: m_Name
       value: Duncrawl Bedframe (4)
@@ -2432,7 +2495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &615359617
 Transform:
   m_ObjectHideFlags: 0
@@ -2544,7 +2607,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &626575837
 Transform:
   m_ObjectHideFlags: 0
@@ -2779,7 +2842,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &654793967
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2924,7 +2987,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: d2d68a0bd49b19c4daaaa4f47f5c6170, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 0360950f7ae569a41a1bfc705ae1859a, type: 2}
+      objectReference: {fileID: 2100000, guid: 1a7edcb69ab62d449a29dac70f4e2610, type: 2}
     - target: {fileID: 919132149155446097, guid: d2d68a0bd49b19c4daaaa4f47f5c6170, type: 3}
       propertyPath: m_Name
       value: Duncrawl Bedframe (2)
@@ -2952,7 +3015,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &680908038
 Transform:
   m_ObjectHideFlags: 0
@@ -3158,7 +3221,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: d2d68a0bd49b19c4daaaa4f47f5c6170, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 0360950f7ae569a41a1bfc705ae1859a, type: 2}
+      objectReference: {fileID: 2100000, guid: 1a7edcb69ab62d449a29dac70f4e2610, type: 2}
     - target: {fileID: 919132149155446097, guid: d2d68a0bd49b19c4daaaa4f47f5c6170, type: 3}
       propertyPath: m_Name
       value: Duncrawl Bedframe
@@ -3186,7 +3249,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &822214572
 Transform:
   m_ObjectHideFlags: 0
@@ -3331,7 +3394,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: d2d68a0bd49b19c4daaaa4f47f5c6170, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 0360950f7ae569a41a1bfc705ae1859a, type: 2}
+      objectReference: {fileID: 2100000, guid: 1a7edcb69ab62d449a29dac70f4e2610, type: 2}
     - target: {fileID: 919132149155446097, guid: d2d68a0bd49b19c4daaaa4f47f5c6170, type: 3}
       propertyPath: m_Name
       value: Duncrawl Bedframe (7)
@@ -3398,6 +3461,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d48d2f3e6cd2b9241b1bbedf4f7e8985, type: 3}
+--- !u!1001 &872295792
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 392615b4e6734a547b061552ae72f5d4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 25.725653
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 392615b4e6734a547b061552ae72f5d4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.2500001
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 392615b4e6734a547b061552ae72f5d4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 23.313784
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 392615b4e6734a547b061552ae72f5d4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 392615b4e6734a547b061552ae72f5d4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 392615b4e6734a547b061552ae72f5d4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 392615b4e6734a547b061552ae72f5d4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 392615b4e6734a547b061552ae72f5d4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 392615b4e6734a547b061552ae72f5d4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 392615b4e6734a547b061552ae72f5d4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 392615b4e6734a547b061552ae72f5d4, type: 3}
+      propertyPath: m_Name
+      value: Duncrawl Cell Full With Door 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 392615b4e6734a547b061552ae72f5d4, type: 3}
 --- !u!1001 &890576521
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3473,7 +3593,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &908033655
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3585,7 +3705,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &954638703
 Transform:
   m_ObjectHideFlags: 0
@@ -3820,7 +3940,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1013040437
 Transform:
   m_ObjectHideFlags: 0
@@ -3932,7 +4052,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1020407024
 Transform:
   m_ObjectHideFlags: 0
@@ -4165,7 +4285,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: d2d68a0bd49b19c4daaaa4f47f5c6170, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 0360950f7ae569a41a1bfc705ae1859a, type: 2}
+      objectReference: {fileID: 2100000, guid: 1a7edcb69ab62d449a29dac70f4e2610, type: 2}
     - target: {fileID: 919132149155446097, guid: d2d68a0bd49b19c4daaaa4f47f5c6170, type: 3}
       propertyPath: m_Name
       value: Duncrawl Bedframe (6)
@@ -4368,7 +4488,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1092671744
 Transform:
   m_ObjectHideFlags: 0
@@ -4581,6 +4701,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fc87655ad1d835c4b87b9cfd6b13dd01, type: 3}
   m_PrefabInstance: {fileID: 1114805227}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1166320789
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 97881cae995f58f43aad4f0e7e94d048, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12.013886
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 97881cae995f58f43aad4f0e7e94d048, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.25000015
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 97881cae995f58f43aad4f0e7e94d048, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 31.55583
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 97881cae995f58f43aad4f0e7e94d048, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 97881cae995f58f43aad4f0e7e94d048, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 97881cae995f58f43aad4f0e7e94d048, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 97881cae995f58f43aad4f0e7e94d048, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 97881cae995f58f43aad4f0e7e94d048, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 97881cae995f58f43aad4f0e7e94d048, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 97881cae995f58f43aad4f0e7e94d048, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 97881cae995f58f43aad4f0e7e94d048, type: 3}
+      propertyPath: m_Name
+      value: Duncrawl Cell Full With Door
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 97881cae995f58f43aad4f0e7e94d048, type: 3}
 --- !u!1001 &1168233371
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4780,7 +4957,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1190806218
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4892,7 +5069,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1196920965
 Transform:
   m_ObjectHideFlags: 0
@@ -5004,7 +5181,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1201742965
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5116,7 +5293,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1257309501
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5228,7 +5405,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1262046318
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5387,59 +5564,59 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -18.678547
+      value: -17.448
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.050000183
+      value: -0.04999876
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.28642
+      value: -5.988
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.1379498
+      value: -0.7071068
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.1379498
+      value: 0.70710677
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.6935199
+      value: -0.00013039168
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.6935199
+      value: -0.00013038731
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 360.021
       objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -7511558181221131132, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 290302798976daa41869c61894448f2d, type: 2}
-    - target: {fileID: 919132149155446097, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: 919132149155446097, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_Name
-      value: Duncrawl Cell Structure (2)
+      value: Duncrawl ToiletSink
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
 --- !u!1001 &1313376898
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5642,7 +5819,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1436562054
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5909,7 +6086,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: d2d68a0bd49b19c4daaaa4f47f5c6170, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 0360950f7ae569a41a1bfc705ae1859a, type: 2}
+      objectReference: {fileID: 2100000, guid: 1a7edcb69ab62d449a29dac70f4e2610, type: 2}
     - target: {fileID: 919132149155446097, guid: d2d68a0bd49b19c4daaaa4f47f5c6170, type: 3}
       propertyPath: m_Name
       value: Duncrawl Bedframe (9)
@@ -5988,59 +6165,59 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.868
+      value: -11.004
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.049999833
+      value: -0.050004005
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.808
+      value: -2.915
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.44620824
+      value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.44620824
+      value: -0.5
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.5485419
+      value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.5485419
+      value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -90
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -8679921383154817045, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 258.253
+      value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: -7511558181221131132, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 290302798976daa41869c61894448f2d, type: 2}
-    - target: {fileID: 919132149155446097, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+    - target: {fileID: 919132149155446097, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
       propertyPath: m_Name
-      value: Duncrawl Cell Structure
+      value: Duncrawl ToiletSink (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e5f0ffeca83652d40899af4e2e149293, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: bf36cdb68cf9e33439b76efaf06d48ed, type: 3}
 --- !u!1001 &1507085262
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6297,7 +6474,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1539738991
 Transform:
   m_ObjectHideFlags: 0
@@ -6470,7 +6647,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1566593750
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6582,7 +6759,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1577707583
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6816,7 +6993,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &1621224903
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7082,7 +7259,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1669339018
 Transform:
   m_ObjectHideFlags: 0
@@ -7312,7 +7489,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1733999974
 Transform:
   m_ObjectHideFlags: 0
@@ -7457,7 +7634,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: d2d68a0bd49b19c4daaaa4f47f5c6170, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 0360950f7ae569a41a1bfc705ae1859a, type: 2}
+      objectReference: {fileID: 2100000, guid: 1a7edcb69ab62d449a29dac70f4e2610, type: 2}
     - target: {fileID: 919132149155446097, guid: d2d68a0bd49b19c4daaaa4f47f5c6170, type: 3}
       propertyPath: m_Name
       value: Duncrawl Bedframe (8)
@@ -7485,7 +7662,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1799696563
 Transform:
   m_ObjectHideFlags: 0
@@ -7659,7 +7836,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1837034787
 Transform:
   m_ObjectHideFlags: 0
@@ -7771,7 +7948,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1873628762
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8196,7 +8373,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1990276769
 Transform:
   m_ObjectHideFlags: 0
@@ -8465,7 +8642,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: d2d68a0bd49b19c4daaaa4f47f5c6170, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 0360950f7ae569a41a1bfc705ae1859a, type: 2}
+      objectReference: {fileID: 2100000, guid: 1a7edcb69ab62d449a29dac70f4e2610, type: 2}
     - target: {fileID: 919132149155446097, guid: d2d68a0bd49b19c4daaaa4f47f5c6170, type: 3}
       propertyPath: m_Name
       value: Duncrawl Bedframe (1)
@@ -8897,3 +9074,6 @@ SceneRoots:
   - {fileID: 1465184543}
   - {fileID: 626815549}
   - {fileID: 302880586}
+  - {fileID: 265399605}
+  - {fileID: 1166320789}
+  - {fileID: 872295792}

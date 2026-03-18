@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d2d68a0bd49b19c4daaaa4f47f5c6170
+guid: 392615b4e6734a547b061552ae72f5d4
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -9,6 +9,31 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: BedFrameMaterial
     second: {fileID: 2100000, guid: 1a7edcb69ab62d449a29dac70f4e2610, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cell Door
+    second: {fileID: 2100000, guid: 9d6a96c2abacc8b488d7a08f911052b5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CellCeiling
+    second: {fileID: 2100000, guid: b581bbc685b30ab44995deb8e92deb2d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CellFloor
+    second: {fileID: 2100000, guid: 6fa71f0d66621084dad46e742018aeb1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CellWall
+    second: {fileID: 2100000, guid: 5af3f3462eb11b046adbe675fad577e6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ToiletSink
+    second: {fileID: 2100000, guid: 050c7e308a3e1d0488f9346c487f5af2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

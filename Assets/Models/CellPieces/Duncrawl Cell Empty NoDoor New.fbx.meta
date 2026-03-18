@@ -1,9 +1,24 @@
 fileFormatVersion: 2
-guid: 97881cae995f58f43aad4f0e7e94d048
+guid: fc87655ad1d835c4b87b9cfd6b13dd01
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CellCeiling
+    second: {fileID: 2100000, guid: b581bbc685b30ab44995deb8e92deb2d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CellFloor
+    second: {fileID: 2100000, guid: 6fa71f0d66621084dad46e742018aeb1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CellWall
+    second: {fileID: 2100000, guid: 5af3f3462eb11b046adbe675fad577e6, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

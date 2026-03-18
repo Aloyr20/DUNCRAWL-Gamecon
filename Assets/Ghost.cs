@@ -2,34 +2,43 @@ using UnityEngine;
 
 public class Ghost : MonoBehaviour
 {
-    public enum State { Patrol, Chase, Return }
+    public enum State
+    {
+        Patrol,
+        Chase,
+        SearchLastKnown,
+        Return
+    }
 
     [Header("References")]
-    public Transform player;                 
-    public Transform firePoint;              
-    public GameObject skullProjectilePrefab; 
+    public Transform player;
+    public Transform firePoint;
+    public GameObject skullProjectilePrefab;
 
     [Header("Detection")]
-    public float detectionRange = 12f;       
-    public LayerMask obstacleMask;           
+    public float detectionRange = 12f;
+    public LayerMask obstacleMask;
 
     [Header("Movement")]
     public float patrolSpeed = 2.0f;
     public float chaseSpeed = 3.5f;
     public float returnSpeed = 3.0f;
-    public float flyingBobAmplitude = 0.35f; 
-    public float flyingBobFrequency = 1.8f;  
+    public float searchSpeed = 3.2f;
+
+    [Header("Flying")]
+    public float flyingBobAmplitude = 0.35f;
+    public float flyingBobFrequency = 1.8f;
 
     [Header("Patrol (circle)")]
-    public float patrolRadius = 3f;          
-    public float patrolAngularSpeed = 1.2f;  
+    public float patrolRadius = 3f;
+    public float patrolAngularSpeed = 1.2f;
 
     [Header("Chase rules")]
-    public float lostLoSChaseTime = 3.0f;    
-    public float stopDistance = 1.2f;       
+    public float stopDistance = 1.2f;
+    public float searchPositionReachDistance = 0.4f;
 
     [Header("Attack")]
-    public float shootCooldown = 1.2f;      
+    public float shootCooldown = 1.2f;
     public float projectileSpeed = 10f;
     public int projectileDamage = 1;
 
@@ -38,17 +47,18 @@ public class Ghost : MonoBehaviour
 
     private State state = State.Patrol;
     private Vector3 originPos;
+    private Vector3 lastKnownPlayerPosition;
+    private bool hasLastKnownPosition = false;
+
     private float patrolAngle;
     private float shootTimer;
-    private float lostTimer;                
-    private float baseY;
 
     private void Awake()
     {
         originPos = transform.position;
-        baseY = originPos.y;
         patrolAngle = Random.Range(0f, Mathf.PI * 2f);
         shootTimer = Random.Range(0f, shootCooldown);
+        lastKnownPlayerPosition = originPos;
     }
 
     private void Update()
@@ -57,29 +67,58 @@ public class Ghost : MonoBehaviour
 
         float dt = Time.deltaTime;
 
-        bool inRange = Vector3.Distance(transform.position, player.position) <= detectionRange;
-        bool hasLoS = HasLineOfSightToPlayer();
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        bool inRange = distanceToPlayer <= detectionRange;
+        bool hasLoS = false;
 
-        
+        // if player in rnage, check LOS
+        if (inRange)
+        {
+            hasLoS = HasLineOfSightToPlayer();
+        }
+
+        // If could see player, record last position
+        if (inRange && hasLoS)
+        {
+            lastKnownPlayerPosition = player.position;
+            hasLastKnownPosition = true;
+        }
+
+
         switch (state)
         {
             case State.Patrol:
                 if (inRange && hasLoS)
                 {
                     state = State.Chase;
-                    lostTimer = 0f;
                 }
                 break;
 
             case State.Chase:
-                if (hasLoS)
+
+                if (!inRange || !hasLoS)
                 {
-                    lostTimer = 0f;
+                    if (hasLastKnownPosition)
+                    {
+                        state = State.SearchLastKnown;
+                    }
+                    else
+                    {
+                        state = State.Return;
+                    }
+                }
+                break;
+
+            case State.SearchLastKnown:
+                // if seeing the player
+                if (inRange && hasLoS)
+                {
+                    state = State.Chase;
                 }
                 else
                 {
-                    lostTimer += dt;
-                    if (lostTimer >= lostLoSChaseTime)
+                    // Back to last position seen the player
+                    if (Vector3.Distance(transform.position, lastKnownPlayerPosition) <= searchPositionReachDistance)
                     {
                         state = State.Return;
                     }
@@ -87,18 +126,18 @@ public class Ghost : MonoBehaviour
                 break;
 
             case State.Return:
-                if (Vector3.Distance(transform.position, originPos) <= 0.2f)
-                {
-                    state = State.Patrol;
-                }
-                
-                else if (inRange && hasLoS)
+                if (inRange && hasLoS)
                 {
                     state = State.Chase;
-                    lostTimer = 0f;
+                }
+                else if (Vector3.Distance(transform.position, originPos) <= 0.2f)
+                {
+                    state = State.Patrol;
+                    hasLastKnownPosition = false;
                 }
                 break;
         }
+
 
         switch (state)
         {
@@ -109,13 +148,16 @@ public class Ghost : MonoBehaviour
             case State.Chase:
                 ChaseMove(dt);
 
-                //only can do this when in line of sight
                 shootTimer -= dt;
-                if (hasLoS && shootTimer <= 0f)
+                if (inRange && hasLoS && shootTimer <= 0f)
                 {
                     //ShootSkull();
                     shootTimer = shootCooldown;
                 }
+                break;
+
+            case State.SearchLastKnown:
+                SearchLastKnownMove(dt);
                 break;
 
             case State.Return:
@@ -123,8 +165,8 @@ public class Ghost : MonoBehaviour
                 break;
         }
 
-        ApplyFlyingBob(dt);
-        FacePlayerIfChasing();
+        ApplyFlyingBob();
+        FaceMovementDirection();
     }
 
     private bool HasLineOfSightToPlayer()
@@ -136,6 +178,7 @@ public class Ghost : MonoBehaviour
         {
             return false;
         }
+
         return true;
     }
 
@@ -149,7 +192,10 @@ public class Ghost : MonoBehaviour
             Mathf.Sin(patrolAngle) * patrolRadius
         );
 
-        MoveTowards(target, patrolSpeed, dt);
+        // keep Y value
+        target.y = originPos.y;
+
+        MoveTowards3D(target, patrolSpeed, dt, false);
     }
 
     private void ChaseMove(float dt)
@@ -159,57 +205,88 @@ public class Ghost : MonoBehaviour
 
         if (dist <= stopDistance) return;
 
-        MoveTowards(target, chaseSpeed, dt);
+
+        MoveTowards3D(target, chaseSpeed, dt, true);
+    }
+
+    private void SearchLastKnownMove(float dt)
+    {
+        MoveTowards3D(lastKnownPlayerPosition, searchSpeed, dt, true);
     }
 
     private void ReturnMove(float dt)
     {
-        MoveTowards(originPos, returnSpeed, dt);
+
+        MoveTowards3D(originPos, returnSpeed, dt, true);
     }
 
-    private void MoveTowards(Vector3 target, float speed, float dt)
+    private void MoveTowards3D(Vector3 target, float speed, float dt, bool allowVerticalMovement)
     {
         Vector3 pos = transform.position;
 
-        target.y = baseY;
+        if (!allowVerticalMovement)
+        {
+            target.y = originPos.y;
+        }
 
         Vector3 newPos = Vector3.MoveTowards(pos, target, speed * dt);
         transform.position = newPos;
     }
 
-    private void ApplyFlyingBob(float dt)
+    private void ApplyFlyingBob()
     {
+
         Vector3 p = transform.position;
-        float bob = Mathf.Sin(Time.time * flyingBobFrequency) * flyingBobAmplitude;
-        p.y = baseY + bob;
+        p.y += Mathf.Sin(Time.time * flyingBobFrequency) * flyingBobAmplitude * Time.deltaTime;
         transform.position = p;
     }
 
-    private void FacePlayerIfChasing()
+    private void FaceMovementDirection()
     {
-        if (state != State.Chase) return;
+        Vector3 dir = Vector3.zero;
 
-        Vector3 dir = player.position - transform.position;
+        switch (state)
+        {
+            case State.Chase:
+                dir = player.position - transform.position;
+                break;
+
+            case State.SearchLastKnown:
+                dir = lastKnownPlayerPosition - transform.position;
+                break;
+
+            case State.Return:
+                dir = originPos - transform.position;
+                break;
+        }
+
         dir.y = 0f;
+
         if (dir.sqrMagnitude < 0.0001f) return;
 
-        transform.rotation = Quaternion.Slerp(
-            transform.rotation,
-            Quaternion.LookRotation(dir.normalized),
-            Time.deltaTime * 8f
-        );
+        Quaternion targetRot = Quaternion.LookRotation(dir.normalized);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * 8f);
     }
 
-   
+
 
     private void OnDrawGizmosSelected()
     {
         if (!drawGizmos) return;
 
+        Vector3 center = Application.isPlaying ? originPos : transform.position;
+
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(Application.isPlaying ? originPos : transform.position, detectionRange);
+        Gizmos.DrawWireSphere(center, detectionRange);
 
         Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(Application.isPlaying ? originPos : transform.position, patrolRadius);
+        Gizmos.DrawWireSphere(center, patrolRadius);
+
+        if (Application.isPlaying && hasLastKnownPosition)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(lastKnownPlayerPosition, 0.4f);
+            Gizmos.DrawLine(transform.position, lastKnownPlayerPosition);
+        }
     }
 }

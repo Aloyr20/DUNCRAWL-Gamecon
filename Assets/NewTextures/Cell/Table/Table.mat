@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-85997318162682759
+--- !u!114 &-3804501440714111015
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Editor::UnityEditor.Rendering.Universal.AssetVersion
   version: 10
 --- !u!21 &2100000
 Material:
@@ -20,12 +20,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FloorMaterial
+  m_Name: Table
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _RECEIVE_SHADOWS_OFF
+  - _METALLICSPECGLOSSMAP
+  - _NORMALMAP
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -40,16 +41,16 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: eb58241b5cd91e94789295cc9b93f731, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 9ebdb3e0dc3a9b941b5b3e1778ccd114, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
-        m_Texture: {fileID: 2800000, guid: f41b7f96d167c1247ac8126ed0be43b2, type: 3}
-        m_Scale: {x: 10, y: 10}
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailMask:
         m_Texture: {fileID: 0}
@@ -64,11 +65,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: eb58241b5cd91e94789295cc9b93f731, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 8598406e7a9b6d54ba5ddc8d95315bda, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -119,8 +120,8 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueOffset: 0
-    - _ReceiveShadows: 0
-    - _Smoothness: 0.15
+    - _ReceiveShadows: 1
+    - _Smoothness: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1

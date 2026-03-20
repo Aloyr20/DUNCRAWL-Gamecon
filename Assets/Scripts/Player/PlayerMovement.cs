@@ -72,17 +72,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        onGround = Physics.Raycast(transform.position, Vector3.down, heightOfPlayer * 0.5f + 0.2f, ground);
+        Ray ray = new Ray(transform.position, Vector3.down);
+        onGround = Physics.SphereCast(ray, 0.5f, heightOfPlayer * 0.5f + 0.2f, ground);
         PlayerInput();
         SpeedController();
         PlayerState();
         SprintBarUpdate();
-
-
-        if (Input.GetKey(KeyCode.V))
-        {
-            Debug.Log(Time.timeScale);
-        }
 
         StartCoroutine(VelocityToSpeed());
         StartCoroutine(Footsteps());
@@ -270,6 +265,11 @@ public class PlayerMovement : MonoBehaviour
 
             readyToSample = true;
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(collision.collider.name);
     }
 
 }

@@ -52,6 +52,8 @@ public class PlayerMovement : MonoBehaviour
     float lastSavedSpeed;
     public float speedThreshold;
 
+    public TurnScript camScript;
+
     public enum MovementState
     {
         walking,
@@ -64,12 +66,14 @@ public class PlayerMovement : MonoBehaviour
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Dagger"), true);
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        Time.timeScale = 1f;
 
     }
 
     void Update()
     {
-        onGround = Physics.Raycast(transform.position, Vector3.down, heightOfPlayer * 0.5f + 0.2f, ground);
+        Ray ray = new Ray(transform.position, Vector3.down);
+        onGround = Physics.SphereCast(ray, 0.5f, heightOfPlayer * 0.5f + 0.2f, ground);
         PlayerInput();
         SpeedController();
         PlayerState();
@@ -116,17 +120,23 @@ public class PlayerMovement : MonoBehaviour
             state = MovementState.sprinting;
             moveS = sprintS;
             sprinting = true;
+            camScript.IsRunning = true;
+            camScript.IsWalking = false;
         }
         else if (onGround)
         {
             state = MovementState.walking;
             moveS = walkS;
             sprinting = false;
+            camScript.IsRunning = false;
+            camScript.IsWalking = true;
         }
         else
         {
             state = MovementState.air;
             sprinting = false;
+            camScript.IsRunning = false;
+            camScript.IsWalking = false;
         }
     }
 
@@ -255,6 +265,11 @@ public class PlayerMovement : MonoBehaviour
 
             readyToSample = true;
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(collision.collider.name);
     }
 
 }

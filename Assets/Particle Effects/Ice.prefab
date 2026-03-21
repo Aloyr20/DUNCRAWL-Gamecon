@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3339891668800040858}
   - component: {fileID: 8841023266857891387}
   - component: {fileID: -4431544626777449209}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Ice
   m_TagString: Untagged
   m_Icon: {fileID: 0}

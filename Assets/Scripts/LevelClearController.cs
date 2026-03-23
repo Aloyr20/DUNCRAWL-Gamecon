@@ -88,6 +88,8 @@ public class LevelClearController : MonoBehaviour
 
     public void Lose()
     {
+        bleedPanel.StopAllCoroutines();
+        bleedPanel.DestroyBleedPanels();
         Time.timeScale = 0f;
         turn.GetComponent<TurnScript>().enabled = false;
         LoseScreen.SetActive(true);

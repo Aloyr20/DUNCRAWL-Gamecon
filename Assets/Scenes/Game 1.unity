@@ -24952,6 +24952,9 @@ MonoBehaviour:
   PlayerTransform: {fileID: 664562237}
   SwordAnim: {fileID: 984451482}
   SwingDuration: 0
+  sourceSwing: {fileID: 0}
+  sourceHit: {fileID: 0}
+  sound: []
 --- !u!82 &411501708
 AudioSource:
   m_ObjectHideFlags: 0
@@ -25204,6 +25207,13 @@ MonoBehaviour:
   stamRecharge: 10
   maxSlope: 0
   state: 0
+  source: {fileID: 0}
+  footstepsCooldown: 0
+  footstepsDuration: 0
+  footstepsPlaying: 0
+  speedSampleTime: 0
+  speedThreshold: 0
+  camScript: {fileID: 0}
 --- !u!114 &411501715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25237,9 +25247,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   health: 100
+  maxHealth: 100
   levelClearController: {fileID: 475439078}
   healthBar: {fileID: 1483238035}
   maxTime: 0.1
+  canvasTransform: {fileID: 0}
+  screenBleedPanel: {fileID: 0}
+  screenBleedDuration: 0
+  maxBleedLayers: 0
 --- !u!114 &411501717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25252,6 +25267,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ac5b18a0100a74a93b30d30a43ef77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpellCaster
+  projectileLauncher: {fileID: 0}
+  mana: {fileID: 0}
+  ui: {fileID: 0}
+  spellPrefabs:
+  - {fileID: 735099054}
+  - {fileID: 735099053}
+  - {fileID: 735099052}
+  iceMana: 25
+  fireMana: 30
+  poisonMana: 45
+  iceCooldown: 5
+  fireCooldown: 10
+  poisonCooldown: 15
+  swapCooldown: 1
+  currentSpell: 0
 --- !u!114 &411501718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25291,6 +25321,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  _itemSlots: []
 --- !u!114 &411501720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32372,10 +32403,11 @@ MonoBehaviour:
   Wave2Skeletons: {fileID: 321066629}
   WinScreen: {fileID: 1700097031}
   LoseScreen: {fileID: 1514537773}
-  Arrow: {fileID: 972415536}
+  door: {fileID: 0}
   lutController: {fileID: 832575520}
   turn: {fileID: 872683468}
   audioTrack: {fileID: 69549793}
+  bleedPanel: {fileID: 0}
 --- !u!1 &476975297
 GameObject:
   m_ObjectHideFlags: 0
@@ -40186,6 +40218,21 @@ PrefabInstance:
 --- !u!224 &735099051 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5753895497676682828, guid: 939cb2b0ea1829f4ab94b56d2ddf82ef, type: 3}
+  m_PrefabInstance: {fileID: 735099050}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &735099052 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6891601722631890877, guid: 939cb2b0ea1829f4ab94b56d2ddf82ef, type: 3}
+  m_PrefabInstance: {fileID: 735099050}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &735099053 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6380388232249188637, guid: 939cb2b0ea1829f4ab94b56d2ddf82ef, type: 3}
+  m_PrefabInstance: {fileID: 735099050}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &735099054 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3495638839539465921, guid: 939cb2b0ea1829f4ab94b56d2ddf82ef, type: 3}
   m_PrefabInstance: {fileID: 735099050}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &735379976 stripped
@@ -48586,6 +48633,10 @@ MonoBehaviour:
   MouseSensitivity: 4
   TurnSpeed: 50
   LookDir: {fileID: 664562237}
+  CamBobAmp: 0
+  CamBobSpd: 0
+  IsWalking: 0
+  IsRunning: 0
 --- !u!114 &872683469
 MonoBehaviour:
   m_ObjectHideFlags: 0

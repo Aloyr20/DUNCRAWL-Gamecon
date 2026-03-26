@@ -429,6 +429,59 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e0a610599bc67b54882ba7dda5c0fdab, type: 3}
   m_PrefabInstance: {fileID: 6783610}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7194056
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7194059}
+  - component: {fileID: 7194057}
+  m_Layer: 8
+  m_Name: TextDeactivation (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &7194057
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7194056}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.692688, y: 1, z: 0.7998047}
+  m_Center: {x: -2.2955627, y: 0, z: 3.0804443}
+--- !u!4 &7194059
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7194056}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 567.95, y: 1.45, z: 1505.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8775971
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4468,7 +4521,10 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: bec1932416c24ec438b7aca9a8273b72, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: ce98f7e4a5fdfc64288b2ac0c20ac8cd, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 1965680643}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce98f7e4a5fdfc64288b2ac0c20ac8cd, type: 3}
 --- !u!4 &86121207 stripped
@@ -23315,7 +23371,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialText
   tutorialText: {fileID: 381267520}
+  block: {fileID: 0}
   playerTag: Player
+  textCount: 0
 --- !u!114 &381267523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54689,6 +54747,59 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e0a610599bc67b54882ba7dda5c0fdab, type: 3}
   m_PrefabInstance: {fileID: 899634181}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &900012751
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 900012754}
+  - component: {fileID: 900012752}
+  m_Layer: 8
+  m_Name: TextDeactivation (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &900012752
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900012751}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.692688, y: 1, z: 0.7998047}
+  m_Center: {x: -2.2955627, y: 0, z: 3.0804443}
+--- !u!4 &900012754
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900012751}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 567.95, y: 1.45, z: 1529.73}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &900225964
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -74746,7 +74857,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialText
   tutorialText: {fileID: 1502329879}
+  block: {fileID: 1447550658}
   playerTag: Player
+  textCount: 2
 --- !u!4 &1283196821
 Transform:
   m_ObjectHideFlags: 0
@@ -74756,7 +74869,7 @@ Transform:
   m_GameObject: {fileID: 1283196818}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 567.95, y: 1.45, z: 1517.37}
+  m_LocalPosition: {x: 567.95, y: 1.45, z: 1519.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -84843,6 +84956,59 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e0a610599bc67b54882ba7dda5c0fdab, type: 3}
   m_PrefabInstance: {fileID: 1447531225}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1447550658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1447550661}
+  - component: {fileID: 1447550659}
+  m_Layer: 8
+  m_Name: TextDeactivation (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1447550659
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1447550658}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.934326, y: 1, z: 1.5083008}
+  m_Center: {x: -2.4163818, y: 0, z: 1.3515625}
+--- !u!4 &1447550661
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1447550658}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 567.95, y: 1.45, z: 1519.51}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1448348347
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -89060,7 +89226,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1502329879}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1705}
+  m_LocalPosition: {x: 0, y: 0, z: 2004.9939}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -90992,7 +91158,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialText
   tutorialText: {fileID: 513212505}
+  block: {fileID: 900012751}
   playerTag: Player
+  textCount: 3
 --- !u!4 &1546310178
 Transform:
   m_ObjectHideFlags: 0
@@ -91121,7 +91289,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialText
   tutorialText: {fileID: 1547532381}
+  block: {fileID: 0}
   playerTag: Player
+  textCount: 0
 --- !u!114 &1547532384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94672,7 +94842,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialText
   tutorialText: {fileID: 438377422}
+  block: {fileID: 7194056}
   playerTag: Player
+  textCount: 1
 --- !u!4 &1608774821
 Transform:
   m_ObjectHideFlags: 0
@@ -105745,7 +105917,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialText
   tutorialText: {fileID: 117434970}
+  block: {fileID: 1839326349}
   playerTag: Player
+  textCount: 0
 --- !u!4 &1839326352
 Transform:
   m_ObjectHideFlags: 0
@@ -106100,7 +106274,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialText
   tutorialText: {fileID: 1845327046}
+  block: {fileID: 0}
   playerTag: Player
+  textCount: 0
 --- !u!1001 &1847849089
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -113656,6 +113832,96 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e0a610599bc67b54882ba7dda5c0fdab, type: 3}
   m_PrefabInstance: {fileID: 1964740685}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1965680642
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1965680643}
+  - component: {fileID: 1965680645}
+  - component: {fileID: 1965680644}
+  m_Layer: 0
+  m_Name: Tree_Stem.004 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1965680643
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965680642}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.49619898, y: -0.5037725, z: 0.50377214, w: 0.49619907}
+  m_LocalPosition: {x: 54.326, y: 8.766, z: -88.47116}
+  m_LocalScale: {x: 326.0034, y: 279.9, z: 237.03664}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 86121207}
+  m_LocalEulerAnglesHint: {x: 0.868, y: -90, z: 90}
+--- !u!23 &1965680644
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965680642}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: bec1932416c24ec438b7aca9a8273b72, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1965680645
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965680642}
+  m_Mesh: {fileID: 5591774885450916414, guid: ce98f7e4a5fdfc64288b2ac0c20ac8cd, type: 3}
 --- !u!1001 &1966859755
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -115661,7 +115927,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialText
   tutorialText: {fileID: 1996542457}
+  block: {fileID: 0}
   playerTag: Player
+  textCount: 0
 --- !u!114 &1996542460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125056,6 +125324,9 @@ SceneRoots:
   - {fileID: 294507862}
   - {fileID: 1963742693}
   - {fileID: 1608774821}
+  - {fileID: 7194059}
   - {fileID: 1283196821}
+  - {fileID: 1447550661}
   - {fileID: 1546310178}
+  - {fileID: 900012754}
   - {fileID: 1839326352}

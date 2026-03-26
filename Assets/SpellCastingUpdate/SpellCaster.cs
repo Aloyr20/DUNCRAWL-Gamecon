@@ -1,4 +1,4 @@
-﻿/*using UnityEngine;
+﻿using UnityEngine;
 
 public class SpellCaster : MonoBehaviour
 {
@@ -174,4 +174,4 @@ public class SpellCaster : MonoBehaviour
             case SpellType.Poison: lastPoisonTime = Time.time; break;
         }
     }
-}*/
+}

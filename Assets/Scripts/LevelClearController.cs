@@ -9,7 +9,7 @@ public class LevelClearController : MonoBehaviour
     public GameObject Wave2Skeletons;
     public GameObject WinScreen;
     public GameObject LoseScreen;
-    public GameObject Arrow;
+    public GameObject door;
     public LutController lutController;
     public TurnScript turn;
     public SceneController audioTrack;
@@ -22,7 +22,7 @@ public class LevelClearController : MonoBehaviour
 
         WinScreen.SetActive(false);
         LoseScreen.SetActive(false);
-        Arrow.SetActive(false);
+        door.SetActive(true);
 
     }
 
@@ -35,7 +35,6 @@ public class LevelClearController : MonoBehaviour
                 Wave1Complete();
                 audioTrack.music[0].Stop();
                 audioTrack.music[1].Play();
-                Arrow.SetActive(true);
             }
         }
         else if (wave == 2)
@@ -43,7 +42,6 @@ public class LevelClearController : MonoBehaviour
             if (enemiesKilled == totalEnemiesWave2)
             {
                 Wave2Complete();
-                Arrow.SetActive(false);
                 audioTrack.music[1].Stop();
                 audioTrack.music[0].Play();
             }
@@ -74,24 +72,30 @@ public class LevelClearController : MonoBehaviour
 
         lutController.SetOff();
 
-        Win();
+        door.SetActive(false);
+
+        //Win();
     }
 
     public void Win()
     {
         bleedPanel.StopAllCoroutines();
         bleedPanel.DestroyBleedPanels();
-        Time.timeScale = 0f;
         turn.GetComponent<TurnScript>().enabled = false;
         WinScreen.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 0f;
     }
 
     public void Lose()
     {
         bleedPanel.StopAllCoroutines();
         bleedPanel.DestroyBleedPanels();
-        Time.timeScale = 0f;
         turn.GetComponent<TurnScript>().enabled = false;
         LoseScreen.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 0f;
     }
 }

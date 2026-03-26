@@ -330,8 +330,15 @@ public class PlayerMovement : MonoBehaviour
         readyToSample = true;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public IEnumerator SpeedBoost(float amount, float duration)
     {
-        Debug.Log(collision.collider.name);
+        walkS += amount;
+        sprintS += amount;
+
+        yield return new WaitForSeconds(duration);
+
+        walkS -= amount;
+        sprintS -= amount;
     }
+
 }

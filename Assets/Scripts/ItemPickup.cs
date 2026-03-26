@@ -32,13 +32,18 @@ public class ItemPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Inventory inventory = other.GetComponent<Inventory>();
+            Inventory inventory = FindAnyObjectByType<Inventory>();
+
+            if (inventory == null)
+            {
+                inventory = FindAnyObjectByType<Inventory>();
+            }
 
             if (inventory != null)
             {
                 inventory.AddItem(this);
-                Destroy(gameObject);
             }
+            Destroy(gameObject);
         }
     }
 }

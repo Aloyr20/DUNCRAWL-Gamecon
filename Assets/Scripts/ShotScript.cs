@@ -38,7 +38,7 @@ public class ShotScript : MonoBehaviour
                 {
                     col.gameObject.GetComponent<EnemyHP>().TakeDamage(damage);
                 }
-                
+
             }
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") && collision.gameObject.CompareTag("Dummy"))
@@ -51,7 +51,16 @@ public class ShotScript : MonoBehaviour
             }
             return;
         }
-        else if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") && collision.gameObject.CompareTag("Ghost"))
+        {
+            collision.gameObject.GetComponent<GhostHP>().TakeDamage(damage);
+
+            if (stick)
+            {
+                transform.SetParent(collision.transform, true);
+            }
+        }
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") &! collision.gameObject.CompareTag("Ghost"))
         {
             collision.gameObject.GetComponent<EnemyHP>().TakeDamage(damage);
 

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 542716845190838170}
   - component: {fileID: 860721820009132217}
   - component: {fileID: 1994494289690357173}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6788435371937350315}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 377432195199687107}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 5753712711938445409}
   - component: {fileID: 6929639817071780022}
   - component: {fileID: 6949731150847728990}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 2100662818185821586}
   - component: {fileID: 6598096819193798334}
   - component: {fileID: 7512479246259075621}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -378,7 +378,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3e6bd4249a8f02b498df2bca0ce25a18, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -396,9 +396,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3e6bd4249a8f02b498df2bca0ce25a18, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3481477251861001368}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3e6bd4249a8f02b498df2bca0ce25a18, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3503428410760342555}
   m_SourcePrefab: {fileID: 100100000, guid: 3e6bd4249a8f02b498df2bca0ce25a18, type: 3}
 --- !u!4 &2878588000409845005 stripped
 Transform:
@@ -467,19 +464,3 @@ CapsuleCollider:
   m_Height: 0.0034099997
   m_Direction: 1
   m_Center: {x: 0, y: 0.00042499995, z: 0.013154702}
---- !u!114 &3503428410760342555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3222637951075821495}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a19f1b6333e1f5241b0b6692ecbd5f89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GhostHP
-  maxHealth: 100
-  healthBar: {fileID: 0}
-  meshRenderer: {fileID: 0}
-  dissolveSpeed: 1.5

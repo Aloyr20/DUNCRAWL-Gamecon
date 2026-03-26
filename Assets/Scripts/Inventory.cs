@@ -18,39 +18,71 @@ public class Inventory : MonoBehaviour
     private Image _draggingIcon = null;
     private int _selectedSlot = 0;
 
-    void Start()
+    private void Start()
     {
-        _store = FindAnyObjectByType<StoreTrigger>();
-        _dialogueManager = FindAnyObjectByType<DialogueManager>();
+        if (_store == null)
+        {
+            _store = FindAnyObjectByType<StoreTrigger>();
+        }
+
+        if (_dialogueManager == null)
+        {
+            _dialogueManager = FindAnyObjectByType<DialogueManager>();
+        }
     }
 
-    void Update()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I) && !_store._storeOpen && !_dialogueManager.dialogueActive)
+        if (Input.GetKeyDown(KeyCode.I))
         {
-            ToggleInventory();
-        }
-
-        if (_inventoryOpen && _dialogueManager.dialogueActive)
-        {
-            CloseInventory();
-        }
-
-        if (_inventoryOpen && Input.GetKeyDown(KeyCode.E))
-        {
-            if (_items.Count > 0 && _selectedSlot < _items.Count)
+            if (_store != null)
             {
-                ConsumePotion(_items[_selectedSlot].itemName);
+                if (!_store._storeOpen)
+                {
+                    if (_dialogueManager != null)
+                    {
+                        if (!_dialogueManager.dialogueActive)
+                        {
+                            ToggleInventory();
+                        }
+                    }
+                }
+            }
+        }
+
+        if (_inventoryOpen)
+        {
+            if (_dialogueManager != null)
+            {
+                if (_dialogueManager.dialogueActive)
+                {
+                    CloseInventory();
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (_items.Count > 0)
+                {
+                    if (_selectedSlot < _items.Count)
+                    {
+                        ConsumePotion(_items[_selectedSlot].itemName);
+                    }
+                }
             }
         }
 
         HandleDragging();
     }
 
-    void ToggleInventory()
+    private void ToggleInventory()
     {
         _inventoryOpen = !_inventoryOpen;
-        _inventory.SetActive(_inventoryOpen);
+
+        if (_inventory != null)
+        {
+            _inventory.SetActive(_inventoryOpen);
+        }
 
         if (_inventoryOpen)
         {
@@ -64,10 +96,15 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    void CloseInventory()
+    private void CloseInventory()
     {
         _inventoryOpen = false;
-        _inventory.SetActive(false);
+
+        if (_inventory != null)
+        {
+            _inventory.SetActive(false);
+        }
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -79,8 +116,11 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(ItemPickup item)
     {
-        _items.Add(item);
-        UpdateUI();
+        if (item != null)
+        {
+            _items.Add(item);
+            UpdateUI();
+        }
     }
 
     private void UpdateUI()
@@ -89,8 +129,11 @@ public class Inventory : MonoBehaviour
         {
             if (i < _items.Count)
             {
-                _itemSlots[i].sprite = _items[i].itemIcon;
-                _itemSlots[i].enabled = true;
+                if (_items[i].itemIcon != null)
+                {
+                    _itemSlots[i].sprite = _items[i].itemIcon;
+                    _itemSlots[i].enabled = true;
+                }
             }
             else
             {
@@ -104,71 +147,79 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < _items.Count; i++)
         {
-            if (_items[i].itemName == type)
+            if (_items[i] != null)
             {
-                _items.RemoveAt(i);
-                UpdateUI();
-
-                if (type == "Health")
+                if (_items[i].itemName == type)
                 {
-                    PlayerHealth playerHealth = FindAnyObjectByType<PlayerHealth>();
-                    if (playerHealth != null)
-                    {
-                        playerHealth.GiveHP(50);
-                    }
-                }
+                    _items.RemoveAt(i);
+                    UpdateUI();
 
-                if (type == "Speed")
-                {
-                    PlayerMovement playerMovement = FindAnyObjectByType<PlayerMovement>();
-                    if (playerMovement != null)
+                    if (type == "Health")
                     {
-                        StopCoroutine("SpeedBoost");
-                        StartCoroutine(playerMovement.SpeedBoost(5f, 5f));
+                        PlayerHealth playerHealth = FindAnyObjectByType<PlayerHealth>();
+                        if (playerHealth != null)
+                        {
+                            playerHealth.GiveHP(50);
+                        }
                     }
-                }
 
-                break;
+                    if (type == "Speed")
+                    {
+                        PlayerMovement playerMovement = FindAnyObjectByType<PlayerMovement>();
+                        if (playerMovement != null)
+                        {
+                            StopCoroutine("SpeedBoost");
+                            StartCoroutine(playerMovement.SpeedBoost(5f, 5f));
+                        }
+                    }
+
+                    break;
+                }
             }
         }
     }
 
     private void HandleDragging()
     {
-        if (_draggingItem != null && _draggingIcon != null)
+        if (_draggingItem != null)
         {
-            _draggingIcon.transform.position = Input.mousePosition;
-
-            if (Input.GetMouseButtonUp(0))
+            if (_draggingIcon != null)
             {
-                for (int i = 0; i < _itemSlots.Count; i++)
+                _draggingIcon.transform.position = Input.mousePosition;
+
+                if (Input.GetMouseButtonUp(0))
                 {
-                    RectTransform slotRect = _itemSlots[i].GetComponent<RectTransform>();
-
-                    if (RectTransformUtility.RectangleContainsScreenPoint(slotRect, Input.mousePosition))
+                    for (int i = 0; i < _itemSlots.Count; i++)
                     {
-                        ItemPickup temp = null;
-
-                        if (i < _items.Count)
+                        if (_itemSlots[i] != null)
                         {
-                            temp = _items[i];
+                            RectTransform slotRect = _itemSlots[i].GetComponent<RectTransform>();
+                            if (RectTransformUtility.RectangleContainsScreenPoint(slotRect, Input.mousePosition))
+                            {
+                                ItemPickup temp = null;
+
+                                if (i < _items.Count)
+                                {
+                                    temp = _items[i];
+                                }
+
+                                _items[i] = _draggingItem;
+
+                                if (temp != null)
+                                {
+                                    _items.Add(temp);
+                                }
+
+                                UpdateUI();
+                                break;
+                            }
                         }
-
-                        _items[i] = _draggingItem;
-
-                        if (temp != null)
-                        {
-                            _items.Add(temp);
-                        }
-
-                        UpdateUI();
-                        break;
                     }
-                }
 
-                Destroy(_draggingIcon.gameObject);
-                _draggingItem = null;
-                _draggingIcon = null;
+                    Destroy(_draggingIcon.gameObject);
+                    _draggingItem = null;
+                    _draggingIcon = null;
+                }
             }
         }
     }
@@ -177,15 +228,27 @@ public class Inventory : MonoBehaviour
     {
         if (slotIndex < _items.Count)
         {
-            _draggingItem = _items[slotIndex];
+            if (_items[slotIndex] != null)
+            {
+                _draggingItem = _items[slotIndex];
 
-            GameObject icon = new GameObject("DraggingIcon");
-            icon.transform.SetParent(_inventory.transform);
-            icon.transform.SetAsLastSibling();
+                GameObject icon = new GameObject("DraggingIcon");
+                if (icon != null)
+                {
+                    if (_inventory != null)
+                    {
+                        icon.transform.SetParent(_inventory.transform);
+                        icon.transform.SetAsLastSibling();
 
-            _draggingIcon = icon.AddComponent<Image>();
-            _draggingIcon.sprite = _draggingItem.itemIcon;
-            _draggingIcon.raycastTarget = false;
+                        _draggingIcon = icon.AddComponent<Image>();
+                        if (_draggingIcon != null)
+                        {
+                            _draggingIcon.sprite = _draggingItem.itemIcon;
+                            _draggingIcon.raycastTarget = false;
+                        }
+                    }
+                }
+            }
         }
     }
 }

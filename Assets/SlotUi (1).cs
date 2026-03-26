@@ -4,44 +4,41 @@ using UnityEngine.UI;
 
 public class SlotUi : MonoBehaviour
 {
-
     public Image icon;
     public TextMeshProUGUI numberText;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
     void Reset()
     {
-        icon = transform.Find("icon")?.GetComponent<Image>();
-        numberText = transform.Find("numberText")?.GetComponent<TextMeshProUGUI>();
+        if (icon == null)
+        {
+            icon = transform.Find("icon")?.GetComponent<Image>();
+        }
+        if (numberText == null)
+        {
+            numberText = transform.Find("numberText")?.GetComponent<TextMeshProUGUI>();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void SetIcon(Sprite sprite, int NumberOwn)
+    public void SetIcon(Sprite sprite, int numberOwn)
     {
         if (sprite == null)
         {
-            icon.enabled = false;
-            icon.sprite = null;
-            numberText.enabled = false;
+            if (icon != null) icon.enabled = false;
+            if (icon != null) icon.sprite = null;
+            if (numberText != null) numberText.enabled = false;
             return;
         }
 
-        icon.enabled = true;
-        icon.sprite = sprite;
+        if (icon != null)
+        {
+            icon.enabled = true;
+            icon.sprite = sprite;
+        }
 
-        numberText.enabled = true;
-        numberText.text = NumberOwn.ToString();
-
+        if (numberText != null)
+        {
+            numberText.enabled = true;
+            numberText.text = numberOwn.ToString();
+        }
     }
-
-   
 }

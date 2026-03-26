@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
     public int health = 100;
+    public int maxHealth = 100;
     public LevelClearController levelClearController;
     public Slider healthBar;
 
@@ -29,6 +30,7 @@ public class PlayerHealth : MonoBehaviour
         healthBar.maxValue = health;
         healthBar.minValue = 0;
         healthBar.value = health;
+        health = maxHealth;
         startValue = health;
         targetValue = health;
     }
@@ -68,7 +70,7 @@ public class PlayerHealth : MonoBehaviour
     public void GiveHP(int hp)
     {
         health += hp;
-        health = Mathf.Clamp(health, 0, health);
+        health = Mathf.Clamp(health, 0, maxHealth);
 
         startValue = healthBar.value;
         targetValue = health;

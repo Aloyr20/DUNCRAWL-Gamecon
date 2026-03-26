@@ -14,6 +14,7 @@ public class Ghost : MonoBehaviour
     public Transform player;
     public Transform firePoint;
     public GameObject skullProjectilePrefab;
+    private Rigidbody rb;
 
     [Header("Detection")]
     public float detectionRange = 12f;
@@ -56,6 +57,12 @@ public class Ghost : MonoBehaviour
 
     private void Awake()
     {
+        rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.constraints = RigidbodyConstraints.FreezeRotation;
+        }
+
         originPos = transform.position;
         patrolAngle = Random.Range(0f, Mathf.PI * 2f);
         shootTimer = Random.Range(0f, shootCooldown);
@@ -160,7 +167,7 @@ public class Ghost : MonoBehaviour
         }
 
         ApplyFlyingBob();
-        FaceMovementDirection();
+        //FaceMovementDirection();
     }
 
     private bool HasLineOfSightToPlayer()

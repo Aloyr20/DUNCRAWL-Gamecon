@@ -53,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
     public float speedThreshold;
 
     public TurnScript camScript;
+    private float footstepsTimer;
 
     public enum MovementState
     {
@@ -67,20 +68,19 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         Time.timeScale = 1f;
-
+        readyToSample = true;
+        footstepsTimer = 0f;
     }
 
     void Update()
     {
         Ray ray = new Ray(transform.position, Vector3.down);
-        onGround = Physics.SphereCast(ray, 0.5f, heightOfPlayer * 0.5f + 0.2f, ground);
+        onGround = Physics.Raycast(transform.position, Vector3.down, heightOfPlayer * 0.5f + 0.3f, ground);
         PlayerInput();
-        SpeedController();
         PlayerState();
         SprintBarUpdate();
-
-        StartCoroutine(VelocityToSpeed());
-        StartCoroutine(Footsteps());
+        HandleFootsteps();
+        HandleVelocityToSpeed();
 
         staminaBar.value = currentStam;
 
@@ -97,6 +97,31 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         Movement();
+        SpeedController();
+    }
+
+    private void StepClimb()
+    {
+        if (!onGround || moveDir.magnitude == 0)
+        {
+            return;
+        }
+
+        RaycastHit hitLower;
+
+        float stepHeight = 0.5f;
+
+        Vector3 origin = transform.position + Vector3.up * 0.05f;
+
+        if (Physics.Raycast(origin, transform.forward, out hitLower, 0.6f))
+        {
+            Vector3 upperOrigin = transform.position + Vector3.up * stepHeight;
+
+            if (!Physics.Raycast(upperOrigin, transform.forward, 0.6f))
+            {
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, 2f, rb.linearVelocity.z);
+            }
+        }
     }
 
     void PlayerInput()
@@ -110,7 +135,6 @@ public class PlayerMovement : MonoBehaviour
             Jump();
             Invoke(nameof(JumpReset), cooldownJump);
         }
-
     }
 
     private void PlayerState()
@@ -154,14 +178,34 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
     private void Movement()
     {
         moveDir = lookDir.forward * vertInput + lookDir.right * horiInput;
 
         if (onGround)
         {
-            rb.AddForce(moveDir.normalized * moveS * 10f, ForceMode.Force);
+            if (onGround)
+            {
+                Vector3 targetVelocity = moveDir.normalized * moveS;
+                Vector3 velocity = rb.linearVelocity;
+
+                Vector3 velocityChange = targetVelocity - new Vector3(velocity.x, 0f, velocity.z);
+
+                if (state == MovementState.sprinting)
+                {
+                    rb.linearVelocity = new Vector3(velocity.x + velocityChange.x,rb.linearVelocity.y,velocity.z + velocityChange.z);
+                }
+                else
+                {
+                    float acceleration = 1f;
+                    rb.AddForce(velocityChange * acceleration, ForceMode.VelocityChange);
+                }
+
+                if (rb.linearVelocity.y <= 0)
+                {
+                    rb.AddForce(-Vector3.up * 3f, ForceMode.Force);
+                }
+            }
         }
         else if (!onGround)
         {
@@ -170,16 +214,28 @@ public class PlayerMovement : MonoBehaviour
 
         if (PlayerOnSlope() && !slopeExit)
         {
-            rb.AddForce(PlayerMoveDirSlope() * moveS * 20f, ForceMode.Force);
+            Vector3 slopeDir = Vector3.ProjectOnPlane(moveDir, slopeHit.normal);
+            slopeDir.y = 0f;
+            slopeDir.Normalize();
+            Vector3 targetVelocity = slopeDir * moveS;
+            Vector3 velocity = rb.linearVelocity;
 
-            if (rb.linearVelocity.y > 0)
-            {
-                rb.AddForce(Vector3.down * 80f, ForceMode.Force);
-            }
+            Vector3 velocityChange = targetVelocity - new Vector3(velocity.x, 0f, velocity.z);
+
+            rb.AddForce(velocityChange, ForceMode.VelocityChange);
         }
 
-        rb.useGravity = !PlayerOnSlope();
+        rb.useGravity = true;
 
+        if (rb.linearVelocity.y > 5f)
+        {
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 5f, rb.linearVelocity.z);
+        }
+
+        if (!onGround && rb.linearVelocity.y > 0)
+        {
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        }
     }
 
     private bool PlayerOnSlope()
@@ -202,18 +258,25 @@ public class PlayerMovement : MonoBehaviour
     {
         if (PlayerOnSlope() && !slopeExit)
         {
-            if (rb.linearVelocity.magnitude > moveS)
+            Vector3 velocityFlat = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+
+            float maxSpeed = moveS * 1.2f;
+
+            if (velocityFlat.magnitude > maxSpeed)
             {
-                rb.linearVelocity = rb.linearVelocity.normalized * moveS;
+                Vector3 velocityLimit = velocityFlat.normalized * maxSpeed;
+                rb.linearVelocity = new Vector3(velocityLimit.x, rb.linearVelocity.y, velocityLimit.z);
             }
         }
         else
         {
             Vector3 velocityFlat = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
-            if (velocityFlat.magnitude > moveS)
+            float maxSpeed = moveS * 1.2f;
+
+            if (velocityFlat.magnitude > maxSpeed)
             {
-                Vector3 velocityLimit = velocityFlat.normalized * moveS;
+                Vector3 velocityLimit = velocityFlat.normalized * maxSpeed;
                 rb.linearVelocity = new Vector3(velocityLimit.x, rb.linearVelocity.y, velocityLimit.z);
             }
         }
@@ -232,44 +295,50 @@ public class PlayerMovement : MonoBehaviour
         jumpable = true;
     }
 
-    public IEnumerator Footsteps()
+    private void HandleFootsteps()
     {
-        if (onGround && Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        if (onGround && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)))
         {
-            if (!source.isPlaying)
+            footstepsTimer -= Time.deltaTime;
+            if (footstepsTimer <= 0 && !source.isPlaying)
             {
                 source.Play();
-                yield return new WaitForSeconds(footstepsDuration);
+                footstepsTimer = footstepsDuration;
             }
         }
-
         else
         {
             source.Stop();
-            StopCoroutine(Footsteps());
+            footstepsTimer = 0f;
         }
     }
 
-
-    public IEnumerator VelocityToSpeed()
+    private void HandleVelocityToSpeed()
     {
         if (readyToSample)
         {
             readyToSample = false;
-
-            yield return new WaitForSeconds(speedSampleTime);
-
-            lastSavedSpeed = Mathf.Abs((transform.position - oldPosition).magnitude);
-
-            oldPosition = transform.position;
-
-            readyToSample = true;
+            StartCoroutine(SampleVelocity());
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private IEnumerator SampleVelocity()
     {
-        Debug.Log(collision.collider.name);
+        yield return new WaitForSeconds(speedSampleTime);
+        lastSavedSpeed = Mathf.Abs((transform.position - oldPosition).magnitude);
+        oldPosition = transform.position;
+        readyToSample = true;
+    }
+
+    public IEnumerator SpeedBoost(float amount, float duration)
+    {
+        walkS += amount;
+        sprintS += amount;
+
+        yield return new WaitForSeconds(duration);
+
+        walkS -= amount;
+        sprintS -= amount;
     }
 
 }

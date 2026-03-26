@@ -25536,6 +25536,9 @@ MonoBehaviour:
   PlayerTransform: {fileID: 664562237}
   SwordAnim: {fileID: 984451482}
   SwingDuration: 0
+  sourceSwing: {fileID: 0}
+  sourceHit: {fileID: 0}
+  sound: []
 --- !u!82 &411501708
 AudioSource:
   m_ObjectHideFlags: 0
@@ -25788,6 +25791,13 @@ MonoBehaviour:
   stamRecharge: 10
   maxSlope: 0
   state: 0
+  source: {fileID: 0}
+  footstepsCooldown: 0
+  footstepsDuration: 0
+  footstepsPlaying: 0
+  speedSampleTime: 0
+  speedThreshold: 0
+  camScript: {fileID: 0}
 --- !u!114 &411501715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25824,6 +25834,10 @@ MonoBehaviour:
   levelClearController: {fileID: 475439078}
   healthBar: {fileID: 4922867802524786790}
   maxTime: 0.1
+  canvasTransform: {fileID: 0}
+  screenBleedPanel: {fileID: 0}
+  screenBleedDuration: 0
+  maxBleedLayers: 0
 --- !u!114 &411501717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25836,27 +25850,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ac5b18a0100a74a93b30d30a43ef77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpellCaster
-  projectileLauncher: {fileID: 664562239}
-  mana: {fileID: 411501718}
-  ui: {fileID: 1866081024}
-  spellPrefabs:
-  - {fileID: 1195488954417830032, guid: 53282b4143560e940b3588091c0ae84d, type: 3}
-  - {fileID: 1195488954417830032, guid: f6598e967f84aae419e7c7a634c13bdb, type: 3}
-  - {fileID: 1195488954417830032, guid: 3a48a7a5dbd10b042aa527e59649f2d6, type: 3}
-  iceMana: 25
-  fireMana: 30
-  poisonMana: 45
-  iceCooldown: 5
-  fireCooldown: 10
-  poisonCooldown: 15
-  swapCooldown: 1
-  lastIceTime: -999
-  lastFireTime: -999
-  lastPoisonTime: -999
-  lastSwapTime: -999
-  currentCooldownLeft: 0
-  cooldownReadyPrinted: 0
-  currentSpell: 0
 --- !u!114 &411501718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32510,6 +32503,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkeletonEnemy (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 8597892699254683626, guid: 356844831ebea654d879315e5ab4b38f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8605093205120092894, guid: 356844831ebea654d879315e5ab4b38f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.6505527
@@ -37876,6 +37873,7 @@ MonoBehaviour:
   lutController: {fileID: 832575520}
   turn: {fileID: 872683468}
   audioTrack: {fileID: 69549793}
+  bleedPanel: {fileID: 0}
 --- !u!1 &476975297
 GameObject:
   m_ObjectHideFlags: 0
@@ -38051,6 +38049,10 @@ PrefabInstance:
     - target: {fileID: 8597892699254683626, guid: 356844831ebea654d879315e5ab4b38f, type: 3}
       propertyPath: m_Name
       value: SkeletonEnemy (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8597892699254683626, guid: 356844831ebea654d879315e5ab4b38f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8605093205120092894, guid: 356844831ebea654d879315e5ab4b38f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -54955,6 +54957,10 @@ MonoBehaviour:
   MouseSensitivity: 4
   TurnSpeed: 50
   LookDir: {fileID: 664562237}
+  CamBobAmp: 0
+  CamBobSpd: 0
+  IsWalking: 0
+  IsRunning: 0
 --- !u!114 &872683469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109696,6 +109702,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkeletonEnemy (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8597892699254683626, guid: 356844831ebea654d879315e5ab4b38f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8605093205120092894, guid: 356844831ebea654d879315e5ab4b38f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.96816826
@@ -109865,6 +109875,7 @@ GameObject:
   - component: {fileID: 1731005414}
   - component: {fileID: 1731005413}
   - component: {fileID: 1731005412}
+  - component: {fileID: 1731005416}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -109955,6 +109966,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 2.008667}
   m_SizeDelta: {x: 1054, y: 593}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1731005416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731005411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc56f185a21d4f0469b36eddcfdb0a27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GhostHP
+  maxHealth: 100
+  healthBar: {fileID: 0}
+  meshRenderer: {fileID: 0}
+  dissolveSpeed: 1.5
 --- !u!1 &1733059737
 GameObject:
   m_ObjectHideFlags: 0
@@ -115016,17 +115043,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865798919}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1866081024 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5601048107869432569, guid: 939cb2b0ea1829f4ab94b56d2ddf82ef, type: 3}
-  m_PrefabInstance: {fileID: 735099050}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e32291fdb6ce284f9e71edd9bb2e620, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpellUIController
 --- !u!1 &1869528146
 GameObject:
   m_ObjectHideFlags: 0
@@ -120084,6 +120100,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkeletonEnemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8597892699254683626, guid: 356844831ebea654d879315e5ab4b38f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8605093205120092894, guid: 356844831ebea654d879315e5ab4b38f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.0687466
@@ -122489,6 +122509,10 @@ PrefabInstance:
     - target: {fileID: 8597892699254683626, guid: 356844831ebea654d879315e5ab4b38f, type: 3}
       propertyPath: m_Name
       value: SkeletonEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8597892699254683626, guid: 356844831ebea654d879315e5ab4b38f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8605093205120092894, guid: 356844831ebea654d879315e5ab4b38f, type: 3}
       propertyPath: m_LocalPosition.x

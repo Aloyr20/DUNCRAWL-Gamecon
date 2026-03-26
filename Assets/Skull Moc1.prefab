@@ -122,8 +122,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1335319951040706130}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ec8449274f92034089afba67cf1dd9f, type: 3}
+  m_Script: {fileID: 11500000, guid: 10b304b42dc00a34a988f082f1c9b263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkullProjectile
+  damage: 1
   speed: 10
   lifeTime: 3

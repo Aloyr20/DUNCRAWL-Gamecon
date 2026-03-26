@@ -78,7 +78,6 @@ public class Ghost : MonoBehaviour
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
         bool inRange = distanceToPlayer <= detectionRange;
         bool hasLoS = false;
-
         if (inRange)
         {
             hasLoS = HasLineOfSightToPlayer();
@@ -167,7 +166,7 @@ public class Ghost : MonoBehaviour
         }
 
         ApplyFlyingBob();
-        //FaceMovementDirection();
+        FaceMovementDirection();
     }
 
     private bool HasLineOfSightToPlayer()
@@ -300,13 +299,18 @@ public class Ghost : MonoBehaviour
             case State.Return:
                 dir = originPos - transform.position;
                 break;
+
+            case State.Patrol:
+                return;
         }
 
         dir.y = 0f;
 
         if (dir.sqrMagnitude < 0.0001f) return;
 
-        Quaternion targetRot = Quaternion.LookRotation(dir.normalized);
+        Quaternion lookRot = Quaternion.LookRotation(dir.normalized);
+        Quaternion targetRot = lookRot * Quaternion.Euler(-90f, 0f, 0f);
+
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * 8f);
     }
 

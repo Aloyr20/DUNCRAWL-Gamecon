@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class ItemPickup : MonoBehaviour
 {
     public string itemName;
-    public Sprite itemIcon;
+    public Image itemIcon;
     public float rotationSpeed = 2f;
 
     private Transform player;
@@ -34,16 +36,12 @@ public class ItemPickup : MonoBehaviour
         {
             Inventory inventory = FindAnyObjectByType<Inventory>();
 
-            if (inventory == null)
-            {
-                inventory = FindAnyObjectByType<Inventory>();
-            }
-
             if (inventory != null)
             {
                 inventory.AddItem(this);
+                Debug.Log(inventory.name);
             }
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

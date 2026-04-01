@@ -125,20 +125,19 @@ public class Inventory : MonoBehaviour
 
     private void UpdateUI()
     {
-        Debug.Log("hello");
         for (int i = 0; i < _itemSlots.Count; i++)
         {
             if (i < _items.Count)
             {
                 if (_items[i].itemIcon != null)
                 {
-                    
+                    _itemSlots[i].sprite = _items[i].itemIcon;
                     _itemSlots[i].enabled = true;
                 }
             }
             else
             {
-
+                _itemSlots[i].sprite = null;
                 _itemSlots[i].enabled = false;
             }
         }
@@ -244,6 +243,7 @@ public class Inventory : MonoBehaviour
                         _draggingIcon = icon.AddComponent<Image>();
                         if (_draggingIcon != null)
                         {
+                            _draggingIcon.sprite = _draggingItem.itemIcon;
                             _draggingIcon.raycastTarget = false;
                         }
                     }

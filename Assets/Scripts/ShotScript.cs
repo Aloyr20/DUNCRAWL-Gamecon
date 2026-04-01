@@ -60,7 +60,7 @@ public class ShotScript : MonoBehaviour
                 transform.SetParent(collision.transform, true);
             }
         }
-        else if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") &! collision.gameObject.CompareTag("Ghost"))
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") && !collision.gameObject.CompareTag("Ghost"))
         {
             collision.gameObject.GetComponent<EnemyHP>().TakeDamage(damage);
 

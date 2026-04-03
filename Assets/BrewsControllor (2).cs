@@ -16,11 +16,6 @@ public class BrewsControllor : MonoBehaviour
         SS = FindAnyObjectByType<SlotSpawn>();
     }
 
-    void Update()
-    {
-      
-    }
-
     public void AddRedS()
     {
         OwnNumber[0]++;

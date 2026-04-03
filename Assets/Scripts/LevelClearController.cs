@@ -55,7 +55,6 @@ public class LevelClearController : MonoBehaviour
 
     void Wave1Complete()
     {
-        Debug.Log("Wave 1 complete");
         enemiesKilled = 0;
         wave = 2;
 
@@ -67,7 +66,6 @@ public class LevelClearController : MonoBehaviour
 
     void Wave2Complete()
     {
-        Debug.Log("Wave 2 complete");
         enemiesKilled = 0;
 
         lutController.SetOff();

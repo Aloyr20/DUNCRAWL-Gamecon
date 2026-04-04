@@ -12,7 +12,7 @@ public class GhostHP : MonoBehaviour
     public float dissolveSpeed = 1.5f;
     private float dissolveAmount = 0f;
     private bool isDissolving = false;
-
+    public LevelClearController levelClearController;
     private bool isDead = false;
 
     void Start()
@@ -76,5 +76,7 @@ public class GhostHP : MonoBehaviour
         }
 
         isDissolving = true;
+
+        levelClearController.EnemyKilled();
     }
 }

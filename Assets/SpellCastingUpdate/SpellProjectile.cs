@@ -37,9 +37,14 @@ public class SpellProjectile : MonoBehaviour
 
         if (AoE)
         {
-            Collider[] hits = Physics.OverlapSphere(transform.position, AoERadius, LayerMask.GetMask("Enemy"));
-            foreach (Collider col in hits)
+            Collider[] hits = new Collider[20];
+
+            int hitCount = Physics.OverlapSphereNonAlloc(transform.position,AoERadius,hits,LayerMask.GetMask("Enemy"));
+
+            for (int i = 0; i < hitCount; i++)
             {
+                Collider col = hits[i];
+
                 EnemyHP hp = col.GetComponent<EnemyHP>();
                 if (hp != null)
                 {

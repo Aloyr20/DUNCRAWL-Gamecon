@@ -74,19 +74,28 @@ public class PlayerAttack : MonoBehaviour
 
     void EnemyDetermine()
     {
-        _enemies = Physics.OverlapSphere(transform.position + (PlayerTransform.forward * reach), _radius, _enemyLayer);
-
-        foreach (Collider enemy in _enemies)
+        if (_enemies == null)
         {
+            _enemies = new Collider[10];
+        }
+
+        int hitCount = Physics.OverlapSphereNonAlloc(transform.position + (PlayerTransform.forward * reach), _radius, _enemies, _enemyLayer);
+
+        for (int i = 0; i < hitCount; i++)
+        {
+            Collider enemy = _enemies[i];
+
             if (!sourceHit.isPlaying)
             {
                 sourceHit.PlayOneShot(sound[1], 1.4f);
             }
+
             if (enemy.name == "Dummy")
             {
                 enemy.GetComponent<DummyEnemy>().TakeDamage();
                 return;
             }
+
             enemy.GetComponent<EnemyHP>().TakeDamage(damage);
         }
     }

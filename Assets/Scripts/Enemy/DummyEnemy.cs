@@ -4,15 +4,6 @@ using UnityEngine.UI;
 public class DummyEnemy : MonoBehaviour
 {
     public Slider healthBar;
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
 
     private void OnCollisionEnter(Collision collision)
     {

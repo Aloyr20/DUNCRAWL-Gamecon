@@ -12,11 +12,6 @@ public class DaggerFlyScript : MonoBehaviour
         rb.AddForce(transform.up * flySpeed);
     }
 
-    void Update()
-    {
-        
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log(collision.collider.name);

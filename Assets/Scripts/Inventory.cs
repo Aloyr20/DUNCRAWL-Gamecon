@@ -125,7 +125,6 @@ public class Inventory : MonoBehaviour
 
     private void UpdateUI()
     {
-        Debug.Log("hello");
         for (int i = 0; i < _itemSlots.Count; i++)
         {
             if (i < _items.Count)

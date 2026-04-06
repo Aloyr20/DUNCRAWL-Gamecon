@@ -19,26 +19,24 @@ public class ShotScript : MonoBehaviour
         particles = GetComponent<ParticleSystem>(); 
     }
 
-    void Update()
-    {
-
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         damage = Mathf.RoundToInt(damage + 2 * (damage * charge));
 
         if (AoE)
         {
-            Collider[] hit = Physics.OverlapSphere(transform.position, AoEradius, LayerMask.GetMask("Enemy"));
-            foreach (Collider col in hit)
+            Collider[] hits = new Collider[20];
+
+            int hitCount = Physics.OverlapSphereNonAlloc(transform.position,AoEradius,hits,LayerMask.GetMask("Enemy"));
+
+            for (int i = 0; i < hitCount; i++)
             {
+                Collider col = hits[i];
 
-                if (col.gameObject.layer == 9 && col.gameObject.GetComponent<EnemyHP>() != null)
+                if (col.gameObject.layer == 9 && col.GetComponent<EnemyHP>() != null)
                 {
-                    col.gameObject.GetComponent<EnemyHP>().TakeDamage(damage);
+                    col.GetComponent<EnemyHP>().TakeDamage(damage);
                 }
-
             }
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") && collision.gameObject.CompareTag("Dummy"))

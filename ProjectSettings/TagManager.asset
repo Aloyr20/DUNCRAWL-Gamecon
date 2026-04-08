@@ -10,6 +10,8 @@ TagManager:
   - SceneTransition
   - SceneSwitch
   - Ghost
+  - Caster
+  - Spider
   layers:
   - Default
   - TransparentFX

@@ -95,6 +95,27 @@ public class PlayerAttack : MonoBehaviour
                 enemy.GetComponent<DummyEnemy>().TakeDamage();
                 return;
             }
+            if (enemy.name == "Caster")
+            {
+
+                Debug.Log("Attcking Caster");
+                enemy.GetComponent<CasterSkeletonEnemy>().TakeDamage();
+                return;
+            }
+            if (enemy.name == "Ghost")
+            {
+
+                Debug.Log("Attcking Ghost");
+                enemy.GetComponent<GhostHP>().TakeDamage(20);
+                return;
+            }
+            if (enemy.name == "Sp(Clone)")
+            {
+
+                Debug.Log("Attcking Spider");
+                enemy.GetComponent<SpiderEnemy>().TakeDamage();
+                return;
+            }
 
             enemy.GetComponent<EnemyHP>().TakeDamage(damage);
         }

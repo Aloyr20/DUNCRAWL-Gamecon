@@ -16,8 +16,7 @@ public class SpiderEnemy : MonoBehaviour
     public float damageCooldown = 1f;
 
     [Header("HP")]
-    public int maxHP = 2;
-    private int currentHP;
+    public float HP = 2;
 
     private float damageTimer;
     private bool isCollidingWithPlayer;
@@ -25,7 +24,6 @@ public class SpiderEnemy : MonoBehaviour
 
     private void Start()
     {
-        currentHP = maxHP;
         FindPlayer();
     }
 
@@ -58,6 +56,11 @@ public class SpiderEnemy : MonoBehaviour
         {
             currentPlayerHealth.TakeDamage(damage);
             damageTimer = damageCooldown;
+        }
+
+        if (HP <= 0)
+        {
+            Die();
         }
     }
 
@@ -103,6 +106,11 @@ public class SpiderEnemy : MonoBehaviour
                 currentPlayerHealth.TakeDamage(damage);
                 damageTimer = damageCooldown;
             }
+
+            if (collision.gameObject.CompareTag("Knife"))
+            {
+                TakeDamage();
+            }
         }
     }
 
@@ -114,19 +122,15 @@ public class SpiderEnemy : MonoBehaviour
             currentPlayerHealth = null;
         }
     }
-
-    public void TakeDamage(int amount)
+    
+    public void TakeDamage()
     {
-        currentHP -= amount;
+        HP -= 30;
 
-        if (currentHP <= 0)
-        {
-            Die();
-        }
     }
 
     private void Die()
     {
-        Destroy(gameObject);
+        Destroy(this.gameObject);
     }
 }

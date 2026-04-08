@@ -28,6 +28,7 @@ public class CasterSkeletonEnemy : MonoBehaviour
     private Vector3 startPosition;
     private bool isReturning = false;
 
+    public float HP = 100;
     private void Start()
     {
         spiderTimer = spiderSpawnInterval;
@@ -67,6 +68,11 @@ public class CasterSkeletonEnemy : MonoBehaviour
                 HandleSpiderSpawn();
                 HandleSkullShoot();
             }
+        }
+
+        if (HP <= 0)
+        {
+            Die();
         }
     }
 
@@ -145,5 +151,29 @@ public class CasterSkeletonEnemy : MonoBehaviour
 
         Quaternion targetRot = Quaternion.LookRotation(dir);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * 5f);
+    }
+
+    public void TakeDamage()
+    {
+
+
+        Debug.Log("Caster TakeDamage");
+        HP -= 20;
+        //gameObject.GetComponentInChildren<ParticleSystem>().Play();
+        Invoke("HealthBarFill", 0.5f);
+    }
+
+    void Die()
+    {
+        Destroy(this.gameObject);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Knife"))
+        {
+            Destroy(collision.gameObject);
+            TakeDamage();
+        }
     }
 }

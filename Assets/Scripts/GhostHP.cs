@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class GhostHP : MonoBehaviour
 {
-    public float maxHealth = 100f;
+    public float maxHealth = 20f;
     private float currentHealth;
 
     public Slider healthBar;
@@ -78,5 +78,14 @@ public class GhostHP : MonoBehaviour
         isDissolving = true;
 
         levelClearController.EnemyKilled();
+    }
+
+
+
+    public void TakeDamage()
+    {
+        healthBar.value -= 20;
+        //gameObject.GetComponentInChildren<ParticleSystem>().Play();
+        Invoke("HealthBarFill", 0.5f);
     }
 }

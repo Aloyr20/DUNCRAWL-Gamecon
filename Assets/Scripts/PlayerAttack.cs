@@ -116,6 +116,13 @@ public class PlayerAttack : MonoBehaviour
                 enemy.GetComponent<SpiderEnemy>().TakeDamage();
                 return;
             }
+            if (enemy.name == "CasterBoss")
+            {
+
+                Debug.Log("Attcking CasterBoss");
+                enemy.GetComponent<CasterBoss>().TakeDamage(20);
+                return;
+            }
 
             enemy.GetComponent<EnemyHP>().TakeDamage(damage);
         }

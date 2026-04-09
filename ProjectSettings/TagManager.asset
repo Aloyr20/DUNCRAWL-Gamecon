@@ -12,6 +12,7 @@ TagManager:
   - Ghost
   - Caster
   - Spider
+  - CasterBoss
   layers:
   - Default
   - TransparentFX

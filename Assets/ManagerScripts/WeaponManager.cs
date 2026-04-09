@@ -2,29 +2,38 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
-    string Weapon = "sword";
-
+    public string Weapon = "sword";
     public GameObject[] SwordObjs;
     public PlayerAttack attack;
-
     public GameObject[] BowObjs;
     public Projectile shoot;
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+    private bool wasSword = false;
+    private bool wasBow = false;
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Inventory.IsDragging)
+        {
+            return;
+        }
+
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        if (scroll != 0f)
         {
             Switch();
         }
 
-        if (Weapon == "sword")
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Inventory inventory = FindAnyObjectByType<Inventory>();
+            if (inventory != null)
+            {
+                inventory.UseActiveSlotItem();
+            }
+        }
+
+        if (Weapon == "sword" && !wasSword)
         {
             shoot.enabled = false;
             attack.enabled = true;
@@ -36,8 +45,10 @@ public class WeaponManager : MonoBehaviour
             {
                 obj.SetActive(false);
             }
+            wasSword = true;
+            wasBow = false;
         }
-        else
+        else if (Weapon == "bow" && !wasBow)
         {
             shoot.enabled = true;
             attack.enabled = false;
@@ -49,6 +60,8 @@ public class WeaponManager : MonoBehaviour
             {
                 obj.SetActive(true);
             }
+            wasBow = true;
+            wasSword = false;
         }
     }
 

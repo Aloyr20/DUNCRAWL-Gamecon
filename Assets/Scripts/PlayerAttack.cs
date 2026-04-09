@@ -1,4 +1,3 @@
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
@@ -7,31 +6,30 @@ public class PlayerAttack : MonoBehaviour
     public float _radius = 5.0f;
     public LayerMask _enemyLayer;
     public float reach;
-
     public int damage = 20;
-
     public Transform PlayerTransform;
-
     public Animator SwordAnim;
     public float SwingDuration;
     string currentstate;
-
     bool stopSlash = true;
-
     public AudioSource sourceSwing;
     public AudioSource sourceHit;
     public AudioClip[] sound;
-
 
     void Start()
     {
         AnimatorStateInfo info = SwordAnim.GetCurrentAnimatorStateInfo(0);
         currentstate = GetCurrentStateName(info);
+        _enemies = new Collider[10];
     }
-
 
     void Update()
     {
+        if (Inventory.IsDragging)
+        {
+           return;
+        }
+
         AnimatorStateInfo info = SwordAnim.GetCurrentAnimatorStateInfo(0);
 
         if (Input.GetMouseButtonDown(0) && stopSlash)
@@ -50,23 +48,21 @@ public class PlayerAttack : MonoBehaviour
 
         if ((info.IsName(currentstate) == false) && GetCurrentStateName(info) == "Slash")
         {
-            //just started slashing
             if (!sourceSwing.isPlaying)
             {
                 sourceSwing.PlayOneShot(sound[0], 1.5f);
             }
             EnemyDetermine();
-
         }
+
         if ((info.IsName(currentstate) == false) && GetCurrentStateName(info) == "Windup")
         {
-            //just started windup
             stopSlash = true;
-
         }
 
         currentstate = GetCurrentStateName(info);
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position + (PlayerTransform.forward * reach), _radius);
@@ -74,12 +70,9 @@ public class PlayerAttack : MonoBehaviour
 
     void EnemyDetermine()
     {
-        if (_enemies == null)
-        {
-            _enemies = new Collider[10];
-        }
-
-        int hitCount = Physics.OverlapSphereNonAlloc(transform.position + (PlayerTransform.forward * reach), _radius, _enemies, _enemyLayer);
+        int hitCount = Physics.OverlapSphereNonAlloc(
+            transform.position + (PlayerTransform.forward * reach),
+            _radius, _enemies, _enemyLayer);
 
         for (int i = 0; i < hitCount; i++)
         {
@@ -90,49 +83,68 @@ public class PlayerAttack : MonoBehaviour
                 sourceHit.PlayOneShot(sound[1], 1.4f);
             }
 
-            if (enemy.name == "Dummy")
-            {
-                enemy.GetComponent<DummyEnemy>().TakeDamage();
-                return;
-            }
-            if (enemy.name == "Caster")
-            {
+            DealDamageToEnemy(enemy.gameObject);
+        }
+    }
 
-                Debug.Log("Attcking Caster");
-                enemy.GetComponent<CasterSkeletonEnemy>().TakeDamage();
-                return;
-            }
-            if (enemy.name == "Ghost")
+    void DealDamageToEnemy(GameObject enemy)
+    {
+        if (enemy.CompareTag("Dummy"))
+        {
+            DummyEnemy dummy = enemy.GetComponent<DummyEnemy>();
+            if (dummy != null)
             {
-
-                Debug.Log("Attcking Ghost");
-                enemy.GetComponent<GhostHP>().TakeDamage(20);
-                return;
+                dummy.TakeDamage();
             }
-            if (enemy.name == "Sp(Clone)")
+        }
+        else if (enemy.CompareTag("Caster"))
+        {
+            CasterSkeletonEnemy caster = enemy.GetComponent<CasterSkeletonEnemy>();
+            if (caster != null)
             {
-
-                Debug.Log("Attcking Spider");
-                enemy.GetComponent<SpiderEnemy>().TakeDamage();
-                return;
+                caster.TakeDamage();
             }
-            if (enemy.name == "CasterBoss")
+        }
+        else if (enemy.CompareTag("Ghost"))
+        {
+            GhostHP ghost = enemy.GetComponent<GhostHP>();
+            if (ghost != null)
             {
-
-                Debug.Log("Attcking CasterBoss");
-                enemy.GetComponent<CasterBoss>().TakeDamage(20);
-                return;
+                ghost.TakeDamage(damage);
             }
-
-            enemy.GetComponent<EnemyHP>().TakeDamage(damage);
+        }
+        else if (enemy.CompareTag("Spider"))
+        {
+            SpiderEnemy spider = enemy.GetComponent<SpiderEnemy>();
+            if (spider != null)
+            {
+                spider.TakeDamage();
+            }
+        }
+        else
+        {
+            EnemyHP hp = enemy.GetComponent<EnemyHP>();
+            if (hp != null)
+            {
+                hp.TakeDamage(damage);
+            }
         }
     }
 
     string GetCurrentStateName(AnimatorStateInfo info)
     {
-        if (info.IsName("Windup")) return "Windup";
-        if (info.IsName("Slash")) return "Slash";
-        if (info.IsName("Recovery")) return "Recovery";
+        if (info.IsName("Windup"))
+        {
+            return "Windup";
+        }
+        if (info.IsName("Slash"))
+        {
+            return "Slash";
+        }
+        if (info.IsName("Recovery"))
+        {
+            return "Recovery";
+        }
         return "Unknown";
     }
 }

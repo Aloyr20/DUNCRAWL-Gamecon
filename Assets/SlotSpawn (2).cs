@@ -4,14 +4,32 @@ public class SlotSpawn : MonoBehaviour
 {
     public Transform parent;
     public GameObject slotPrefab;
-    public int slotCount = 6;
-    SlotUi[] slotUis;
+    public int slotCount = 12;
+    private SlotUi[] slotUis;
+    private Sprite[] slotIcons;
 
-    public Sprite[] icon;
+    public SlotUi[] GetSlots()
+    {
+        return slotUis;
+    }
 
-    void Start()
+    public Sprite[] GetSlotIcons()
+    {
+        return slotIcons;
+    }
+
+    public void SetSlotIcon(int index, Sprite icon)
+    {
+        if (index >= 0 && index < slotIcons.Length)
+        {
+            slotIcons[index] = icon;
+        }
+    }
+
+    public void Initialize(Inventory inventory)
     {
         slotUis = new SlotUi[slotCount];
+        slotIcons = new Sprite[slotCount];
 
         for (int i = 0; i < slotCount; i++)
         {
@@ -19,36 +37,77 @@ public class SlotSpawn : MonoBehaviour
             if (a != null)
             {
                 slotUis[i] = a.GetComponent<SlotUi>();
+                slotUis[i].Setup(i, inventory);
             }
         }
     }
 
     public void AddItem(Sprite itemIcon, int numberOwn)
     {
-        if (itemIcon == null) return;
+        if (itemIcon == null)
+        {
+            return;
+        }
 
         for (int i = 0; i < slotUis.Length; i++)
         {
-            if (icon[i] == itemIcon)
+            if (slotIcons[i] == itemIcon)
             {
-                if (slotUis[i] != null)
-                {
-                    slotUis[i].SetIcon(itemIcon, numberOwn);
-                }
+                slotUis[i].SetIcon(itemIcon, numberOwn);
                 return;
             }
         }
 
         for (int i = 0; i < slotUis.Length; i++)
         {
-            if (icon[i] == null)
+            if (slotIcons[i] == null)
             {
-                icon[i] = itemIcon;
-                if (slotUis[i] != null)
+                slotIcons[i] = itemIcon;
+                slotUis[i].SetIcon(itemIcon, numberOwn);
+                return;
+            }
+        }
+    }
+
+    public void UpdateItem(Sprite itemIcon, int numberOwn)
+    {
+        if (itemIcon == null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < slotUis.Length; i++)
+        {
+            if (slotIcons[i] == itemIcon)
+            {
+                if (numberOwn <= 0)
+                {
+                    slotIcons[i] = null;
+                    slotUis[i].SetIcon(null, 0);
+                }
+                else
                 {
                     slotUis[i].SetIcon(itemIcon, numberOwn);
                 }
-                break;
+                return;
+            }
+        }
+    }
+
+    public void RemoveItem(Sprite itemIcon)
+    {
+        if (itemIcon == null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < slotUis.Length; i++)
+        {
+            if (slotIcons[i] == itemIcon)
+            {
+                slotIcons[i] = null;
+                slotUis[i].SetIcon(null, 0);
+                return;
             }
         }
     }

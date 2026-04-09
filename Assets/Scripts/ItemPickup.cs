@@ -1,13 +1,10 @@
 using UnityEngine;
-using UnityEngine.UI;
-
 
 public class ItemPickup : MonoBehaviour
 {
     public string itemName;
-    public Image itemIcon;
+    public Sprite itemIcon;
     public float rotationSpeed = 2f;
-
     private Transform player;
 
     void Start()
@@ -21,7 +18,6 @@ public class ItemPickup : MonoBehaviour
         {
             Vector3 direction = player.position - transform.position;
             direction.y = 0;
-
             if (direction != Vector3.zero)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
@@ -35,11 +31,9 @@ public class ItemPickup : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Inventory inventory = FindAnyObjectByType<Inventory>();
-
             if (inventory != null)
             {
                 inventory.AddItem(this);
-                Debug.Log(inventory.name);
             }
             gameObject.SetActive(false);
         }

@@ -3,12 +3,10 @@ using UnityEngine.AI;
 
 public class EnemyAi : MonoBehaviour
 {
-    [SerializeField, Range (0,1)] float turnSpeed = 1.0f;
+    [SerializeField, Range(0, 1)] float turnSpeed = 1.0f;
 
     public Transform playerTransform;
-    public GameObject player;
     public NavMeshAgent nav;
-    public LayerMask isPlayer, isGround;
 
     public Transform _playerPosition;
     public Transform _mobPosition;
@@ -25,47 +23,49 @@ public class EnemyAi : MonoBehaviour
     public float distanceFromPlayer;
     public float AttackRange;
     public float AttackCooldown;
-    public float lookAngleLeniance;
     float LastAttack = 0;
 
     public int damage;
 
-    Vector3 PrevPos;
-    public Vector3 lastVectorToPlayer;
-
     Animator animator;
+    PlayerHealth playerHealth;
 
     public float leniencyAngle;
 
-    Camera cam;
     private void Awake()
     {
         nav = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
         playerTransform = GameObject.Find("Player").transform;
+        playerHealth = playerTransform.GetComponent<PlayerHealth>();
+        sightR = 80f;
         Patrol();
-        PrevPos = transform.position;
-        cam = Camera.main;
     }
+
     private void Update()
     {
-        RotateSkeleton();
-
         distanceFromPlayer = Vector3.Distance(_playerPosition.position, _mobPosition.position);
-        Vector3 direction = (_playerPosition.position - _mobPosition.position);
-        RaycastHit hit;
 
-        if (Physics.Raycast(_mobPosition.position, direction.normalized, out hit, 80f))
+        if (distanceFromPlayer <= sightR)
         {
+            Vector3 direction = (_playerPosition.position - _mobPosition.position).normalized;
+            RaycastHit hit;
 
-            if (hit.collider.CompareTag("Player"))
+            if (Physics.Raycast(_mobPosition.position, direction, out hit, sightR))
             {
-                Chase();
+                if (hit.collider.CompareTag("Player"))
+                {
+                    Chase();
+                }
+                else
+                {
+                    Patrol();
+                }
             }
-            else if ((hit.point - _mobPosition.position).normalized.magnitude < direction.magnitude)
-            {
-                Patrol();
-            }
+        }
+        else
+        {
+            Patrol();
         }
 
         if (distanceFromPlayer <= AttackRange && Time.time > LastAttack && !isKicking)
@@ -73,33 +73,26 @@ public class EnemyAi : MonoBehaviour
             animator.SetTrigger("Attack");
         }
 
-        if (nav.velocity.magnitude > 0.1f && !isKicking)
-        {
-            animator.SetBool("Moving", true);
-        }
-        else
-        {
-            animator.SetBool("Moving", false);
-        }
+        bool isMoving = nav.velocity.sqrMagnitude > 0.01f && !isKicking;
+        animator.SetBool("Moving", isMoving);
 
-
-        PrevPos = transform.position;
-
+        RotateSkeleton();
     }
+
     private void Patrol()
     {
         if (!WPointS)
         {
             LookForWalkPoint();
         }
+
         if (WPointS)
         {
             nav.SetDestination(point);
         }
 
-        Vector3 distancePoint = transform.position - point;
-
-        if (distancePoint.magnitude < 1f)
+        float sqrDist = (transform.position - point).sqrMagnitude;
+        if (sqrDist < 1f)
         {
             WPointS = false;
         }
@@ -110,23 +103,22 @@ public class EnemyAi : MonoBehaviour
         float rX = Random.Range(-WPointR, WPointR);
         float rZ = Random.Range(-WPointR, WPointR);
 
-        point = new Vector3(-transform.position.x + rX, transform.position.y, transform.position.z + rZ);
+        point = new Vector3(transform.position.x + rX, transform.position.y, transform.position.z + rZ);
 
-        if (Physics.Raycast(point, -transform.up, 2f, isGround))
+        if (Physics.Raycast(point, Vector3.down, 2f, isGround))
         {
             WPointS = true;
         }
-
     }
+
+    public LayerMask isGround;
+
     private void Chase()
     {
         if (isKicking)
         {
             return;
         }
-
-        Vector3 dirToPlayer = playerTransform.position - transform.position;
-        dirToPlayer.y = 0;
 
         nav.SetDestination(playerTransform.position);
     }
@@ -136,9 +128,10 @@ public class EnemyAi : MonoBehaviour
         if (!hasDamaged && distanceFromPlayer <= AttackRange)
         {
             hasDamaged = true;
-            playerTransform.GetComponent<PlayerHealth>().TakeDamage(damage);
+            playerHealth.TakeDamage(damage);
         }
     }
+
     public void ResetAttack()
     {
         isKicking = false;
@@ -158,29 +151,21 @@ public class EnemyAi : MonoBehaviour
 
     public void RotateSkeleton()
     {
-
         Vector3 vectorToPlayer = (playerTransform.position - transform.position).normalized;
+        float angleDiff = Vector3.SignedAngle(transform.forward, vectorToPlayer, Vector3.up);
 
-        float angleDiffCheck = Vector3.SignedAngle(transform.forward, vectorToPlayer, Vector3.up);
-
-        //If the skeleton has to turn right to be at lenience
-        if (Vector3.SignedAngle(transform.forward, vectorToPlayer, Vector3.up) > leniencyAngle)
+        if (angleDiff > leniencyAngle)
         {
-            //Rotate just enough to be at the lenience angle
-            transform.Rotate(new Vector3(0, angleDiffCheck - leniencyAngle, 0));
+            transform.Rotate(0f, angleDiff - leniencyAngle, 0f);
         }
-        //Else if the skeleton has to turn left to be at lenience
-        else if (Vector3.SignedAngle(transform.forward, vectorToPlayer, Vector3.up) < -leniencyAngle)
+        else if (angleDiff < -leniencyAngle)
         {
-            //Rotate just enough to be at the lenience angle
-            transform.Rotate(new Vector3(0, angleDiffCheck + leniencyAngle, 0));
+            transform.Rotate(0f, angleDiff + leniencyAngle, 0f);
         }
         else
         {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(player.transform.position - transform.position), turnSpeed);
+            Quaternion targetRot = Quaternion.LookRotation(vectorToPlayer);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, turnSpeed);
         }
-
-
     }
 }
-

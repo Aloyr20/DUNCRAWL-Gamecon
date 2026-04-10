@@ -22,8 +22,11 @@ public class SpiderEnemy : MonoBehaviour
     private bool isCollidingWithPlayer;
     private PlayerHealth currentPlayerHealth;
 
+    private Animator animator;
+
     private void Start()
     {
+        animator = GetComponent<Animator>();
         FindPlayer();
     }
 
@@ -37,6 +40,10 @@ public class SpiderEnemy : MonoBehaviour
         if (player == null)
         {
             FindPlayer();
+
+            if (animator != null)
+                animator.SetBool("Moving", false);
+
             return;
         }
 
@@ -50,10 +57,23 @@ public class SpiderEnemy : MonoBehaviour
             {
                 MoveToPlayer();
             }
+            else
+            {
+                if (animator != null)
+                    animator.SetBool("Moving", false);
+            }
+        }
+        else
+        {
+            if (animator != null)
+                animator.SetBool("Moving", false);
         }
 
         if (isCollidingWithPlayer && damageTimer <= 0f && currentPlayerHealth != null)
         {
+            if (animator != null)
+                animator.SetTrigger("Attack");
+
             currentPlayerHealth.TakeDamage(damage);
             damageTimer = damageCooldown;
         }
@@ -75,6 +95,9 @@ public class SpiderEnemy : MonoBehaviour
 
     private void MoveToPlayer()
     {
+        if (animator != null)
+            animator.SetBool("Moving", true);
+
         Vector3 dir = player.position - transform.position;
         dir.y = 0f;
 
@@ -103,14 +126,18 @@ public class SpiderEnemy : MonoBehaviour
 
             if (damageTimer <= 0f && currentPlayerHealth != null)
             {
+                if (animator != null)
+                    animator.SetTrigger("Attack");
+
                 currentPlayerHealth.TakeDamage(damage);
                 damageTimer = damageCooldown;
             }
+        }
 
-            if (collision.gameObject.CompareTag("Knife"))
-            {
-                TakeDamage();
-            }
+        if (collision.gameObject.CompareTag("Knife"))
+        {
+            Destroy(collision.gameObject);
+            TakeDamage();
         }
     }
 
@@ -122,15 +149,17 @@ public class SpiderEnemy : MonoBehaviour
             currentPlayerHealth = null;
         }
     }
-    
+
     public void TakeDamage()
     {
         HP -= 30;
-
     }
 
     private void Die()
     {
-        Destroy(this.gameObject);
+        if (animator != null)
+            animator.SetBool("Moving", false);
+
+        Destroy(gameObject);
     }
 }

@@ -1,34 +1,9 @@
 fileFormatVersion: 2
-guid: fb6c2238942aef248b3dbb6092251937
+guid: a2b1d32201029d24391612dea8d4a63f
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Skeleton Body
-    second: {fileID: 2100000, guid: fa91f7b4386375f46bc8da803d63fc05, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Wand Bottom
-    second: {fileID: 2100000, guid: 8bd3476796b8c244596923c7970b1be9, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Wand Top
-    second: {fileID: 2100000, guid: 46eb6041b54d569429abf36fee09742c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Wizard Hat Base
-    second: {fileID: 2100000, guid: 6c2df2ee213a5674aae2e8243df34dd2, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Wizard Hat Top
-    second: {fileID: 2100000, guid: 126116d0185dee2428aaf930b2e06d79, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 3998065922133353937}
   - component: {fileID: 3247003905312003743}
   - component: {fileID: -3531168201597064857}
-  - component: {fileID: -7048594740943321352}
+  - component: {fileID: 7826144953151317695}
+  - component: {fileID: -3333979059588415757}
   m_Layer: 9
   m_Name: Sp
   m_TagString: Spider
@@ -141,7 +142,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &-7048594740943321352
+--- !u!95 &7826144953151317695
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3158059163856285620}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: c7268eb124dff604d8aba3dc660df0a4, type: 3}
+  m_Controller: {fileID: 9100000, guid: 2883952ba41bf004eb9a8d459575f2fe, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-3333979059588415757
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -71,8 +71,6 @@ public class Inventory : MonoBehaviour
         {
             activeSlotUi.SetupAsActiveSlot(this);
         }
-
-
     }
 
     private void Update()
@@ -81,8 +79,6 @@ public class Inventory : MonoBehaviour
         {
             bool storeBlocking = _store != null && _store._storeOpen;
             bool dialogueBlocking = _dialogueManager != null && _dialogueManager.dialogueActive;
-
-            _turnScript.enabled = false;
 
             if (!storeBlocking && !dialogueBlocking)
             {
@@ -106,6 +102,11 @@ public class Inventory : MonoBehaviour
         if (_inventory != null)
         {
             _inventory.SetActive(_inventoryOpen);
+        }
+
+        if (_turnScript != null)
+        {
+            _turnScript.enabled = !_inventoryOpen;
         }
 
         if (activeSlotUi != null)
@@ -133,6 +134,11 @@ public class Inventory : MonoBehaviour
         if (_inventory != null)
         {
             _inventory.SetActive(false);
+        }
+
+        if (_turnScript != null)
+        {
+            _turnScript.enabled = true;
         }
 
         if (activeSlotUi != null)

@@ -16,6 +16,7 @@ public class PlayerAttack : MonoBehaviour
     public AudioSource sourceSwing;
     public AudioSource sourceHit;
     public AudioClip[] sound;
+    public Inventory inventory;
 
     [Header("Hit Stop")]
     public float hitStopDuration = 0.09f;
@@ -34,7 +35,7 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
-        if (Inventory.IsDragging)
+        if (Inventory.IsDragging || (inventory != null && inventory.IsInventoryOpen()))
         {
             return;
         }
@@ -175,6 +176,14 @@ public class PlayerAttack : MonoBehaviour
             if (spider != null)
             {
                 spider.TakeDamage();
+            }
+        }
+        else if (enemy.CompareTag("CasterBoss"))
+        {
+            CasterBoss boss = enemy.GetComponent<CasterBoss>();
+            if (boss != null)
+            {
+                boss.TakeDamage((int)(damage * mult));
             }
         }
         else

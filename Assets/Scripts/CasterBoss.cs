@@ -51,8 +51,12 @@ public class CasterBoss : MonoBehaviour
     private bool isRepositioning = false;
     private Vector3 repositionTarget;
 
+    private Animator animator;
+
     private void Start()
     {
+        animator = GetComponent<Animator>();
+
         currentHP = maxHP;
         spiderTimer = spiderSpawnInterval;
         skullTimer = skullShootInterval;
@@ -75,6 +79,12 @@ public class CasterBoss : MonoBehaviour
     {
         if (player == null) return;
 
+        if (currentHP <= 0)
+        {
+            Die();
+            return;
+        }
+
         if (repositionTimer > 0f)
         {
             repositionTimer -= Time.deltaTime;
@@ -84,6 +94,9 @@ public class CasterBoss : MonoBehaviour
 
         if (isRepositioning)
         {
+            if (animator != null)
+                animator.SetBool("Moving", true);
+
             MoveToRepositionTarget();
             return;
         }
@@ -105,17 +118,23 @@ public class CasterBoss : MonoBehaviour
 
         if (dirToPlayer.sqrMagnitude < 0.001f) return;
 
+        bool isMoving = false;
+
         if (distanceToPlayer < minDistance)
         {
             Vector3 awayDir = -dirToPlayer.normalized;
             transform.position += awayDir * backAwaySpeed * Time.deltaTime;
+            isMoving = true;
         }
-        
         else if (distanceToPlayer > maxDistance)
         {
             Vector3 forwardDir = dirToPlayer.normalized;
             transform.position += forwardDir * approachSpeed * Time.deltaTime;
+            isMoving = true;
         }
+
+        if (animator != null)
+            animator.SetBool("Moving", isMoving);
     }
 
     private void MoveToRepositionTarget()
@@ -126,6 +145,10 @@ public class CasterBoss : MonoBehaviour
         if (dir.magnitude <= repositionStopDistance)
         {
             isRepositioning = false;
+
+            if (animator != null)
+                animator.SetBool("Moving", false);
+
             return;
         }
 
@@ -142,6 +165,9 @@ public class CasterBoss : MonoBehaviour
         if (spiderTimer <= 0f)
         {
             spiderTimer = spiderSpawnInterval;
+
+            if (animator != null)
+                animator.SetTrigger("Attack");
 
             if (spiderPrefab == null || spiderSpawnParent == null) return;
 
@@ -160,6 +186,9 @@ public class CasterBoss : MonoBehaviour
         if (skullTimer <= 0f)
         {
             skullTimer = skullShootInterval;
+
+            if (animator != null)
+                animator.SetTrigger("Attack");
 
             if (skullPrefab == null || firePoint == null) return;
 
@@ -238,6 +267,9 @@ public class CasterBoss : MonoBehaviour
 
     private void Die()
     {
+        if (animator != null)
+            animator.SetBool("Moving", false);
+
         Destroy(gameObject);
     }
 }

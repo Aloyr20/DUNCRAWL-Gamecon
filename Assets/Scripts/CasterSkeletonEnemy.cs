@@ -7,9 +7,9 @@ public class CasterSkeletonEnemy : MonoBehaviour
 
     [Header("Movement")]
     public float moveSpeed = 3f;
-    public float followRange = 12f;     
-    public float attackRange = 6f;      
-    public float loseRange = 16f;       
+    public float followRange = 12f;
+    public float attackRange = 6f;
+    public float loseRange = 16f;
     public float returnStopDistance = 0.2f;
 
     [Header("Spider Spawn")]
@@ -28,9 +28,14 @@ public class CasterSkeletonEnemy : MonoBehaviour
     private Vector3 startPosition;
     private bool isReturning = false;
 
-    public float HP = 100;
+    public float HP = 100f;
+
+    private Animator animator;
+
     private void Start()
     {
+        animator = GetComponent<Animator>();
+
         spiderTimer = spiderSpawnInterval;
         skullTimer = skullShootInterval;
         startPosition = transform.position;
@@ -39,6 +44,12 @@ public class CasterSkeletonEnemy : MonoBehaviour
     private void Update()
     {
         if (player == null) return;
+
+        if (HP <= 0)
+        {
+            Die();
+            return;
+        }
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
@@ -50,7 +61,6 @@ public class CasterSkeletonEnemy : MonoBehaviour
         if (isReturning)
         {
             ReturnToStart();
-
             return;
         }
 
@@ -62,22 +72,27 @@ public class CasterSkeletonEnemy : MonoBehaviour
             {
                 MoveToPlayer();
             }
-
-            if (distanceToPlayer <= attackRange)
+            else
             {
+                if (animator != null)
+                    animator.SetBool("Moving", false);
+
                 HandleSpiderSpawn();
                 HandleSkullShoot();
             }
         }
-
-        if (HP <= 0)
+        else
         {
-            Die();
+            if (animator != null)
+                animator.SetBool("Moving", false);
         }
     }
 
     private void MoveToPlayer()
     {
+        if (animator != null)
+            animator.SetBool("Moving", true);
+
         Vector3 dir = player.position - transform.position;
         dir.y = 0f;
 
@@ -88,6 +103,9 @@ public class CasterSkeletonEnemy : MonoBehaviour
 
     private void ReturnToStart()
     {
+        if (animator != null)
+            animator.SetBool("Moving", true);
+
         Vector3 dir = startPosition - transform.position;
         dir.y = 0f;
 
@@ -95,6 +113,10 @@ public class CasterSkeletonEnemy : MonoBehaviour
         {
             transform.position = new Vector3(startPosition.x, transform.position.y, startPosition.z);
             isReturning = false;
+
+            if (animator != null)
+                animator.SetBool("Moving", false);
+
             return;
         }
 
@@ -112,6 +134,9 @@ public class CasterSkeletonEnemy : MonoBehaviour
         {
             spiderTimer = spiderSpawnInterval;
 
+            if (animator != null)
+                animator.SetTrigger("Attack");
+
             if (spiderPrefab == null || spiderSpawnParent == null) return;
 
             foreach (Transform spawnPoint in spiderSpawnParent)
@@ -128,6 +153,9 @@ public class CasterSkeletonEnemy : MonoBehaviour
         if (skullTimer <= 0f)
         {
             skullTimer = skullShootInterval;
+
+            if (animator != null)
+                animator.SetTrigger("Attack");
 
             if (skullPrefab == null || firePoint == null) return;
 
@@ -155,17 +183,17 @@ public class CasterSkeletonEnemy : MonoBehaviour
 
     public void TakeDamage()
     {
-
-
         Debug.Log("Caster TakeDamage");
         HP -= 20;
-        //gameObject.GetComponentInChildren<ParticleSystem>().Play();
         Invoke("HealthBarFill", 0.5f);
     }
 
     void Die()
     {
-        Destroy(this.gameObject);
+        if (animator != null)
+            animator.SetBool("Moving", false);
+
+        Destroy(gameObject);
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -1,52 +1,77 @@
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
-
-public class TutorialText: MonoBehaviour
+public class TutorialText : MonoBehaviour
 {
     public GameObject tutorialText;
     public GameObject block;
     public string playerTag = "Player";
-    public int textCount = 1;
+    public bool useMovementKeys = false;
+    public KeyCode dismissKey = KeyCode.Space;
+
+    private bool playerInside = false;
+    private bool dismissed = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(playerTag))
+        if (dismissed)
         {
-            tutorialText.SetActive(true);
+            return;
+        }
+
+        if (!other.CompareTag(playerTag))
+        {
+            return;
+        }
+
+        playerInside = true;
+        tutorialText.SetActive(true);
+
+        if (block != null)
+        {
             block.SetActive(true);
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void Update()
     {
-        if (other.CompareTag(playerTag) && textCount == 1 && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)))
+        if (!playerInside || dismissed)
         {
-            tutorialText.SetActive(false);
-            block.SetActive(false);
-            textCount++;
-        }
-        if (other.CompareTag(playerTag) && textCount == 2 && Input.GetKeyDown(KeyCode.Space))
-        {
-            tutorialText.SetActive(false);
-            block.SetActive(false);
-            textCount++;
-        }
-        if (other.CompareTag(playerTag) && textCount == 3 && Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            tutorialText.SetActive(false);
-            block.SetActive(false);
-            textCount++;
+            return;
         }
 
+        bool pressed = false;
+
+        if (useMovementKeys)
+        {
+            pressed = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) ||
+                      Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D);
+        }
+        else
+        {
+            pressed = Input.GetKeyDown(dismissKey);
+        }
+
+        if (pressed)
+        {
+            dismissed = true;
+            playerInside = false;
+            tutorialText.SetActive(false);
+
+            if (block != null)
+            {
+                block.SetActive(false);
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag(playerTag))
+        if (!other.CompareTag(playerTag))
         {
-            tutorialText.SetActive(false);
+            return;
         }
+
+        playerInside = false;
+        tutorialText.SetActive(false);
     }
 }

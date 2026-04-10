@@ -38,8 +38,6 @@ public class LevelClearController : MonoBehaviour
             if (enemiesKilled == totalEnemiesWave1)
             {
                 Wave1Complete();
-                audioTrack.music[0].Stop();
-                audioTrack.music[1].Play();
             }
         }
         else if (wave == 2)
@@ -47,8 +45,6 @@ public class LevelClearController : MonoBehaviour
             if (enemiesKilled == totalEnemiesWave2)
             {
                 Wave2Complete();
-                audioTrack.music[1].Stop();
-                audioTrack.music[0].Play();
             }
         }
         else if (wave == 3)

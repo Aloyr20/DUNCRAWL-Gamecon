@@ -4,12 +4,15 @@ public class LevelClearController : MonoBehaviour
 {
     public int totalEnemiesWave1;
     public int totalEnemiesWave2;
+    public int totalEnemiesWave3;
     int enemiesKilled;
     int wave = 1;
     public GameObject Wave2Skeletons;
+    public GameObject Wave3Skeletons;
     public GameObject WinScreen;
     public GameObject LoseScreen;
-    public GameObject door;
+    public GameObject door1;
+    public GameObject door2;
     public LutController lutController;
     public TurnScript turn;
     public SceneController audioTrack;
@@ -23,7 +26,8 @@ public class LevelClearController : MonoBehaviour
 
         WinScreen.SetActive(false);
         LoseScreen.SetActive(false);
-        door.SetActive(true);
+        door1.SetActive(true);
+        door2.SetActive(true);
 
     }
 
@@ -47,6 +51,13 @@ public class LevelClearController : MonoBehaviour
                 audioTrack.music[0].Play();
             }
         }
+        else if (wave == 3)
+        {
+            if (enemiesKilled == totalEnemiesWave3)
+            {
+                Wave3Complete();
+            }
+        }
     }
 
     public void EnemyKilled()
@@ -68,10 +79,20 @@ public class LevelClearController : MonoBehaviour
     void Wave2Complete()
     {
         enemiesKilled = 0;
+        wave = 3;
 
         lutController.SetOff();
 
-        door.SetActive(false);
+        door1.SetActive(false);
+
+        Wave3Skeletons.SetActive(true);
+    }
+
+    void Wave3Complete()
+    {
+        enemiesKilled = 0;
+
+        door2.SetActive(false);
 
         //Win();
     }

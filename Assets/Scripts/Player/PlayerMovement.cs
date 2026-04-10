@@ -222,7 +222,7 @@ public class PlayerMovement : MonoBehaviour
 
             Vector3 velocityChange = targetVelocity - new Vector3(velocity.x, 0f, velocity.z);
 
-            rb.AddForce(velocityChange, ForceMode.VelocityChange);
+            rb.AddForce(velocityChange, ForceMode.Force);
         }
 
         rb.useGravity = true;

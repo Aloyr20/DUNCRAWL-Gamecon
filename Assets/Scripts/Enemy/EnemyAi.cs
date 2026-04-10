@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -91,6 +92,8 @@ public class EnemyAi : MonoBehaviour
         bool isMoving = nav.velocity.sqrMagnitude > 0.01f && !isKicking;
         animator.SetBool("Moving", isMoving);
 
+        Debug.Log(isMoving);
+
         RotateSkeleton();
     }
 
@@ -115,8 +118,8 @@ public class EnemyAi : MonoBehaviour
 
     private void LookForWalkPoint()
     {
-        float rX = Random.Range(-WPointR, WPointR);
-        float rZ = Random.Range(-WPointR, WPointR);
+        float rX = UnityEngine.Random.Range(-WPointR, WPointR);
+        float rZ = UnityEngine.Random.Range(-WPointR, WPointR);
 
         point = new Vector3(transform.position.x + rX, transform.position.y, transform.position.z + rZ);
 

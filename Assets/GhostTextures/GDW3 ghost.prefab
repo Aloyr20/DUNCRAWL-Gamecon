@@ -403,6 +403,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3e6bd4249a8f02b498df2bca0ce25a18, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6820740279158387377}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3e6bd4249a8f02b498df2bca0ce25a18, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5101270712095045996}
   m_SourcePrefab: {fileID: 100100000, guid: 3e6bd4249a8f02b498df2bca0ce25a18, type: 3}
 --- !u!4 &2878588000409845005 stripped
 Transform:
@@ -487,6 +490,21 @@ MonoBehaviour:
   healthBar: {fileID: 6929639817071780022}
   meshRenderer: {fileID: 4015487195757315682}
   dissolveSpeed: 1.5
+  levelClearController: {fileID: 0}
+--- !u!114 &5101270712095045996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3222637951075821495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81df7bfc547263e41ab2b6cb54c1b8ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpellEffectReceiver
+  enemySpeed: 5
+  health: 200
 --- !u!23 &4015487195757315682 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 3e6bd4249a8f02b498df2bca0ce25a18, type: 3}

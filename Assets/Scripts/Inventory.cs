@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class Inventory : MonoBehaviour
 {
     public GameObject _inventory;
+    public TurnScript _turnScript;
     public StoreTrigger _store;
     public DialogueManager _dialogueManager;
     public SlotSpawn _slotSpawn;
@@ -70,6 +71,8 @@ public class Inventory : MonoBehaviour
         {
             activeSlotUi.SetupAsActiveSlot(this);
         }
+
+
     }
 
     private void Update()
@@ -78,6 +81,8 @@ public class Inventory : MonoBehaviour
         {
             bool storeBlocking = _store != null && _store._storeOpen;
             bool dialogueBlocking = _dialogueManager != null && _dialogueManager.dialogueActive;
+
+            _turnScript.enabled = false;
 
             if (!storeBlocking && !dialogueBlocking)
             {

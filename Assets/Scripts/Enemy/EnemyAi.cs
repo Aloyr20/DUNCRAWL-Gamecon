@@ -35,11 +35,25 @@ public class EnemyAi : MonoBehaviour
     private void Awake()
     {
         nav = GetComponent<NavMeshAgent>();
-        animator = GetComponentInChildren<Animator>();
         playerTransform = GameObject.Find("Player").transform;
         playerHealth = playerTransform.GetComponent<PlayerHealth>();
         sightR = 80f;
+        LastAttack = Time.time + AttackCooldown;
         Patrol();
+    }
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+
+        if (animator != null)
+        {
+            animator.Rebind();
+            animator.Update(0f);
+            animator.ResetTrigger("Attack");
+            animator.ResetTrigger("Die");
+            animator.SetBool("Moving", false);
+        }
     }
 
     private void Update()
@@ -70,6 +84,7 @@ public class EnemyAi : MonoBehaviour
 
         if (distanceFromPlayer <= AttackRange && Time.time > LastAttack && !isKicking)
         {
+            animator.ResetTrigger("Attack");
             animator.SetTrigger("Attack");
         }
 

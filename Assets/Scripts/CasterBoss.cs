@@ -41,7 +41,7 @@ public class CasterBoss : MonoBehaviour
     public float projectileScaleMultiplier = 1.5f;
 
     [Header("Boss UI")]
-    public Slider bossHealthBar;
+    public Image bossHealthBar;
 
     private float spiderTimer;
     private float skullTimer;
@@ -66,8 +66,7 @@ public class CasterBoss : MonoBehaviour
 
         if (bossHealthBar != null)
         {
-            bossHealthBar.maxValue = maxHP;
-            bossHealthBar.value = currentHP;
+            bossHealthBar.fillAmount = 1f;
         }
     }
 
@@ -198,7 +197,7 @@ public class CasterBoss : MonoBehaviour
 
         if (bossHealthBar != null)
         {
-            bossHealthBar.value = currentHP;
+            bossHealthBar.fillAmount = (float)currentHP / maxHP;
         }
 
         if (hitCounter >= hitsBeforeReposition && repositionTimer <= 0f)

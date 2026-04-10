@@ -6331,6 +6331,7 @@ GameObject:
   - component: {fileID: 8819271700381097359}
   - component: {fileID: 5058758236572119048}
   - component: {fileID: 7361619290376533781}
+  - component: {fileID: 1613976975978869975}
   m_Layer: 9
   m_Name: SkeletonEnemy
   m_TagString: Untagged
@@ -6393,14 +6394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnSpeed: 0.68
   playerTransform: {fileID: 0}
-  player: {fileID: 0}
   nav: {fileID: 8819271700381097359}
-  isPlayer:
-    serializedVersion: 2
-    m_Bits: 8
-  isGround:
-    serializedVersion: 2
-    m_Bits: 128
   _playerPosition: {fileID: 0}
   _mobPosition: {fileID: 8605093205120092894}
   point: {x: 0, y: 0, z: 0}
@@ -6412,10 +6406,11 @@ MonoBehaviour:
   distanceFromPlayer: 0
   AttackRange: 1.9
   AttackCooldown: 2
-  lookAngleLeniance: 50
   damage: 0
-  lastVectorToPlayer: {x: 0, y: 0, z: 0}
   leniencyAngle: 35
+  isGround:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!195 &8819271700381097359
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -6449,7 +6444,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: c7268eb124dff604d8aba3dc660df0a4, type: 3}
   m_Controller: {fileID: 9100000, guid: 71e21734b76409949ba99f9f6d912305, type: 2}
-  m_CullingMode: 1
+  m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -6477,7 +6472,23 @@ MonoBehaviour:
   maxHealth: 200
   currentHealth: 0
   originalSpeed: 0
+  ai: {fileID: 4008176985562714860}
   barSmoothTime: 0.1
   DissolveTime: 3
   dissolveMaterial: {fileID: 0}
   levelClearController: {fileID: 0}
+--- !u!114 &1613976975978869975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8597892699254683626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81df7bfc547263e41ab2b6cb54c1b8ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpellEffectReceiver
+  iceParticlePrefab: {fileID: 4690078501059019131, guid: e8065e860ad24aa44933d307dcd9d0bf, type: 3}
+  fireParticlePrefab: {fileID: 4690078501059019131, guid: 4a255aa2f7eb300458e49a9fb841f127, type: 3}
+  poisonParticlePrefab: {fileID: 4690078501059019131, guid: 762bab26f2c68774bbef1fa755aae8d2, type: 3}

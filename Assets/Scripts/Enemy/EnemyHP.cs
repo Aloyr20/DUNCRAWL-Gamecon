@@ -12,7 +12,7 @@ public class EnemyHP : MonoBehaviour
     public float currentHealth;
 
     public float originalSpeed;
-    private EnemyAi ai;
+    public EnemyAi ai;
 
     [Header("Status Effects")]
     private bool isPoisoned = false;
@@ -30,11 +30,28 @@ public class EnemyHP : MonoBehaviour
 
     GameObject mesh;
     public Material dissolveMaterial;
+    private Material _originalMeshMaterial;
 
     public LevelClearController levelClearController;
 
+    private Animator _animator;
+
+    private void Awake()
+    {
+        _animator = GetComponentInChildren<Animator>();
+    }
+
     void Start()
     {
+        if (_animator != null)
+        {
+            _animator.Rebind();
+            _animator.Update(0f);
+            _animator.ResetTrigger("Attack");
+            _animator.ResetTrigger("Die");
+            _animator.SetBool("Moving", false);
+        }
+
         ai = GetComponent<EnemyAi>();
         originalSpeed = ai.nav.speed;
 
@@ -51,6 +68,7 @@ public class EnemyHP : MonoBehaviour
         targetValue = currentHealth;
 
         mesh = transform.GetChild(1).GetChild(1).gameObject;
+        _originalMeshMaterial = mesh.GetComponent<SkinnedMeshRenderer>().material;
     }
 
     void Update()
@@ -125,6 +143,11 @@ public class EnemyHP : MonoBehaviour
 
     public void TakeDamage(float damageAmount)
     {
+        if (isDead)
+        {
+            return;
+        }
+
         currentHealth -= damageAmount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
@@ -137,10 +160,7 @@ public class EnemyHP : MonoBehaviour
             GetComponentInChildren<ParticleSystem>().Play();
         }
 
-        if (!isDead)
-        {
-            CheckAlive();
-        }
+        CheckAlive();
     }
 
     void CheckAlive()
@@ -153,9 +173,9 @@ public class EnemyHP : MonoBehaviour
 
             StartCoroutine(StartDissolving());
 
-            if (GetComponent<Animator>() != null)
+            if (_animator != null)
             {
-                GetComponent<Animator>().SetTrigger("Die");
+                _animator.SetTrigger("Die");
             }
 
             if (ai != null)
@@ -177,27 +197,23 @@ public class EnemyHP : MonoBehaviour
 
     public IEnumerator StartDissolving()
     {
+        SetDissolveRate(0);
+
+        float time = 0;
+        while (time < DissolveTime)
         {
-            SetDissolveRate(0);
-
-            float time = 0;
-            while (time < DissolveTime)
-            {
-                time += Time.deltaTime;
-                float rate = Mathf.Clamp01(time / DissolveTime);
-                SetDissolveRate(rate);
-                yield return null;
-            }
-
-            SetDissolveRate(1);
+            time += Time.deltaTime;
+            float rate = Mathf.Clamp01(time / DissolveTime);
+            SetDissolveRate(rate);
+            yield return null;
         }
+
+        SetDissolveRate(1);
     }
 
     private void SetDissolveRate(float value)
     {
         int shaderId = Shader.PropertyToID("_ClipRate");
-
         mesh.GetComponent<SkinnedMeshRenderer>().material.SetFloat(shaderId, value);
     }
 }
-

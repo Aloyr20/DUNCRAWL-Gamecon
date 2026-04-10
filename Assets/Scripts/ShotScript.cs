@@ -10,6 +10,10 @@ public class ShotScript : MonoBehaviour
     public bool stick;
     public float charge = 0f;
 
+    [Header("Fire AOE")]
+    public float fireAoeRadius = 5f;
+    public float fireAoeDamage = 40f;
+
     private Collider _collider;
     private Rigidbody _rigidbody;
     private Light _light;
@@ -58,19 +62,29 @@ public class ShotScript : MonoBehaviour
 
         if (collision.gameObject.layer == _enemyLayer)
         {
-            if (AoE)
+            // Check if hit enemy is on fire — trigger AOE explosion
+            SpellEffectReceiver hitReceiver = collision.gameObject.GetComponent<SpellEffectReceiver>();
+            if (hitReceiver != null && hitReceiver.GetCurrentEffect() == SpellEffectReceiver.SpellType.Fire)
             {
-                Collider[] hits = new Collider[20];
-                int hitCount = Physics.OverlapSphereNonAlloc(
-                    transform.position, AoEradius, hits, LayerMask.GetMask("Enemy"));
-
-                for (int i = 0; i < hitCount; i++)
-                {
-                    DealDamageToEnemy(hits[i].gameObject, finalDamage);
-                }
+                TriggerFireAoe(collision.transform.position);
             }
+            else
+            {
+                // Normal AoE
+                if (AoE)
+                {
+                    Collider[] hits = new Collider[20];
+                    int hitCount = Physics.OverlapSphereNonAlloc(
+                        transform.position, AoEradius, hits, LayerMask.GetMask("Enemy"));
 
-            DealDamageToEnemy(collision.gameObject, finalDamage);
+                    for (int i = 0; i < hitCount; i++)
+                    {
+                        DealDamageToEnemy(hits[i].gameObject, finalDamage);
+                    }
+                }
+
+                DealDamageToEnemy(collision.gameObject, finalDamage);
+            }
 
             if (stick)
             {
@@ -107,6 +121,29 @@ public class ShotScript : MonoBehaviour
         }
     }
 
+    private void TriggerFireAoe(Vector3 origin)
+    {
+        Collider[] hits = new Collider[20];
+        int hitCount = Physics.OverlapSphereNonAlloc(origin, fireAoeRadius, hits, LayerMask.GetMask("Enemy"));
+
+        for (int i = 0; i < hitCount; i++)
+        {
+            SpellEffectReceiver r = hits[i].GetComponent<SpellEffectReceiver>();
+            if (r != null)
+            {
+                r.TakeDamage(fireAoeDamage);
+            }
+            else
+            {
+                EnemyHP hp = hits[i].GetComponent<EnemyHP>();
+                if (hp != null)
+                {
+                    hp.TakeDamage((int)fireAoeDamage);
+                }
+            }
+        }
+    }
+
     private void ReturnToPool()
     {
         CancelInvoke();
@@ -120,6 +157,10 @@ public class ShotScript : MonoBehaviour
 
     private void DealDamageToEnemy(GameObject enemy, int dmg)
     {
+        SpellEffectReceiver spellReceiver = enemy.GetComponent<SpellEffectReceiver>();
+        float mult = spellReceiver != null ? spellReceiver.GetIncomingDamageMultiplier() : 1f;
+        int finalDmg = Mathf.RoundToInt(dmg * mult);
+
         if (enemy.CompareTag("Dummy"))
         {
             DummyEnemy dummy = enemy.GetComponent<DummyEnemy>();
@@ -133,7 +174,7 @@ public class ShotScript : MonoBehaviour
             GhostHP ghost = enemy.GetComponent<GhostHP>();
             if (ghost != null)
             {
-                ghost.TakeDamage(dmg);
+                ghost.TakeDamage(finalDmg);
             }
         }
         else if (enemy.CompareTag("Spider"))
@@ -154,10 +195,17 @@ public class ShotScript : MonoBehaviour
         }
         else
         {
-            EnemyHP hp = enemy.GetComponent<EnemyHP>();
-            if (hp != null)
+            if (spellReceiver != null)
             {
-                hp.TakeDamage(dmg);
+                spellReceiver.TakeDamage(finalDmg);
+            }
+            else
+            {
+                EnemyHP hp = enemy.GetComponent<EnemyHP>();
+                if (hp != null)
+                {
+                    hp.TakeDamage(finalDmg);
+                }
             }
         }
     }

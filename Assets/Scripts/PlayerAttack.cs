@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -16,6 +17,14 @@ public class PlayerAttack : MonoBehaviour
     public AudioSource sourceHit;
     public AudioClip[] sound;
 
+    [Header("Hit Stop")]
+    public float hitStopDuration = 0.09f;
+    public float hitStopTimeScale = 0.04f;
+    private bool _inHitStop = false;
+
+    [Header("Sword AOE Slow")]
+    public float swordAoeRadius = 4.5f;
+
     void Start()
     {
         AnimatorStateInfo info = SwordAnim.GetCurrentAnimatorStateInfo(0);
@@ -27,7 +36,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Inventory.IsDragging)
         {
-           return;
+            return;
         }
 
         AnimatorStateInfo info = SwordAnim.GetCurrentAnimatorStateInfo(0);
@@ -43,10 +52,10 @@ public class PlayerAttack : MonoBehaviour
         }
         else
         {
-            SwordAnim.speed = 1f;
+            SwordAnim.speed = _inHitStop ? 0f : 1f;
         }
 
-        if ((info.IsName(currentstate) == false) && GetCurrentStateName(info) == "Slash")
+        if (!info.IsName(currentstate) && GetCurrentStateName(info) == "Slash")
         {
             if (!sourceSwing.isPlaying)
             {
@@ -55,7 +64,7 @@ public class PlayerAttack : MonoBehaviour
             EnemyDetermine();
         }
 
-        if ((info.IsName(currentstate) == false) && GetCurrentStateName(info) == "Windup")
+        if (!info.IsName(currentstate) && GetCurrentStateName(info) == "Windup")
         {
             stopSlash = true;
         }
@@ -74,21 +83,68 @@ public class PlayerAttack : MonoBehaviour
             transform.position + (PlayerTransform.forward * reach),
             _radius, _enemies, _enemyLayer);
 
+        bool hitAnything = false;
+
         for (int i = 0; i < hitCount; i++)
         {
             Collider enemy = _enemies[i];
-
             if (!sourceHit.isPlaying)
             {
                 sourceHit.PlayOneShot(sound[1], 1.4f);
             }
-
             DealDamageToEnemy(enemy.gameObject);
+            TrySwordAoeSlow(enemy.gameObject);
+            hitAnything = true;
+        }
+
+        if (hitAnything && !_inHitStop)
+        {
+            StartCoroutine(DoHitStop());
+        }
+    }
+
+    IEnumerator DoHitStop()
+    {
+        _inHitStop = true;
+        float prevTimeScale = Time.timeScale;
+        Time.timeScale = hitStopTimeScale;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
+
+        yield return new WaitForSecondsRealtime(hitStopDuration);
+
+        Time.timeScale = prevTimeScale;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
+        _inHitStop = false;
+    }
+
+    void TrySwordAoeSlow(GameObject hitEnemy)
+    {
+        SpellEffectReceiver receiver = hitEnemy.GetComponent<SpellEffectReceiver>();
+        if (receiver == null || receiver.GetCurrentEffect() != SpellEffectReceiver.SpellType.Ice)
+        {
+            return;
+        }
+
+        Collider[] nearby = Physics.OverlapSphere(hitEnemy.transform.position, swordAoeRadius, _enemyLayer);
+        foreach (Collider col in nearby)
+        {
+            if (col.gameObject == hitEnemy)
+            {
+                continue;
+            }
+            SpellEffectReceiver nearbyReceiver = col.GetComponent<SpellEffectReceiver>();
+            if (nearbyReceiver != null)
+            {
+                nearbyReceiver.ApplyEffect(SpellEffectReceiver.SpellType.Ice);
+            }
         }
     }
 
     void DealDamageToEnemy(GameObject enemy)
     {
+        SpellEffectReceiver spellReceiver = enemy.GetComponent<SpellEffectReceiver>();
+        float mult = spellReceiver != null ? spellReceiver.GetIncomingDamageMultiplier() : 1f;
+
         if (enemy.CompareTag("Dummy"))
         {
             DummyEnemy dummy = enemy.GetComponent<DummyEnemy>();
@@ -110,7 +166,7 @@ public class PlayerAttack : MonoBehaviour
             GhostHP ghost = enemy.GetComponent<GhostHP>();
             if (ghost != null)
             {
-                ghost.TakeDamage(damage);
+                ghost.TakeDamage((int)(damage * mult));
             }
         }
         else if (enemy.CompareTag("Spider"))
@@ -123,10 +179,17 @@ public class PlayerAttack : MonoBehaviour
         }
         else
         {
-            EnemyHP hp = enemy.GetComponent<EnemyHP>();
-            if (hp != null)
+            if (spellReceiver != null)
             {
-                hp.TakeDamage(damage);
+                spellReceiver.TakeDamage(damage);
+            }
+            else
+            {
+                EnemyHP hp = enemy.GetComponent<EnemyHP>();
+                if (hp != null)
+                {
+                    hp.TakeDamage((int)(damage * mult));
+                }
             }
         }
     }

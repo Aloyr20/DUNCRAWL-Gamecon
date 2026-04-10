@@ -9,17 +9,16 @@ public class SpellProjectile : MonoBehaviour
     public bool AoE = false;
     public float AoERadius = 3f;
 
-    [Header("Spell Effect Receiver")]
+    [Header("Spell Effect")]
     public SpellEffectReceiver.SpellType spellType;
 
     [Header("Effects")]
     public GameObject dropEffect;
-    private ParticleSystem particles;
+    public GameObject burnDecal;
 
+    private ParticleSystem particles;
     private Rigidbody rb;
     private bool hasHit = false;
-
-    public GameObject burnDecal;
 
     void Start()
     {
@@ -33,31 +32,23 @@ public class SpellProjectile : MonoBehaviour
         {
             return;
         }
-            hasHit = true;
+        hasHit = true;
 
         if (AoE)
         {
             Collider[] hits = new Collider[20];
-
-            int hitCount = Physics.OverlapSphereNonAlloc(transform.position,AoERadius,hits,LayerMask.GetMask("Enemy"));
+            int hitCount = Physics.OverlapSphereNonAlloc(transform.position, AoERadius, hits, LayerMask.GetMask("Enemy"));
 
             for (int i = 0; i < hitCount; i++)
             {
-                Collider col = hits[i];
-
-                EnemyHP hp = col.GetComponent<EnemyHP>();
-                if (hp != null)
-                {
-                    hp.ApplySpellEffect((EnemyHP.SpellType)spellType);
-                }
+                ApplyToEnemy(hits[i].gameObject);
             }
         }
         else
         {
-            EnemyHP hp = collision.collider.GetComponent<EnemyHP>();
-            if (hp != null)
+            if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
-                hp.ApplySpellEffect((EnemyHP.SpellType)spellType);
+                ApplyToEnemy(collision.gameObject);
             }
         }
 
@@ -77,10 +68,10 @@ public class SpellProjectile : MonoBehaviour
             rb.isKinematic = true;
         }
 
-        Collider col2 = GetComponent<Collider>();
-        if (col2 != null)
+        Collider col = GetComponent<Collider>();
+        if (col != null)
         {
-            col2.enabled = false;
+            col.enabled = false;
         }
 
         Light l = GetComponent<Light>();
@@ -91,15 +82,29 @@ public class SpellProjectile : MonoBehaviour
 
         if (burnDecal != null)
         {
-            Vector3 hitPosition = GetComponent<Transform>().position;
-            Quaternion hitRotation = GetComponent<Transform>().rotation;
             GameObject spawnedDecal = Instantiate(burnDecal, null, true);
-            spawnedDecal.transform.position = hitPosition;
-            float multOf90 = Mathf.Round((hitRotation.eulerAngles.y - 90) / 90) * 90;
+            spawnedDecal.transform.position = transform.position;
+            float multOf90 = Mathf.Round((transform.rotation.eulerAngles.y - 90) / 90) * 90;
             spawnedDecal.transform.Rotate(new Vector3(0, multOf90, 0));
         }
 
         Destroy(gameObject, 1.5f);
     }
 
+    private void ApplyToEnemy(GameObject enemy)
+    {
+        SpellEffectReceiver receiver = enemy.GetComponent<SpellEffectReceiver>();
+        if (receiver != null)
+        {
+            receiver.ApplyEffect(spellType);
+        }
+        else
+        {
+            EnemyHP hp = enemy.GetComponent<EnemyHP>();
+            if (hp != null)
+            {
+                hp.TakeDamage(damage);
+            }
+        }
+    }
 }

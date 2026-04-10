@@ -1,0 +1,148 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8136488486950255020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5487418330314307888}
+  - component: {fileID: 9006676805494015551}
+  m_Layer: 5
+  m_Name: GrimoireManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5487418330314307888
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8136488486950255020}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &9006676805494015551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8136488486950255020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb554e24c7eab764692b66af62fc5f80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GrimoireUI
+  grimoirePanel: {fileID: 0}
+  grimoireBackground: {fileID: 0}
+  grimoireIcon: {fileID: 0}
+  grimoireIconImage: {fileID: 0}
+  iconNormal: {fileID: -1705971401, guid: d496eacc9c1b2974ca7f4af9d1b4977e, type: 3}
+  iconNotification: {fileID: 683448053, guid: c99026ff4c36797499a5df5354abf1ee, type: 3}
+  iconFlashInterval: 0.5
+  leftArrowButton: {fileID: 0}
+  rightArrowButton: {fileID: 0}
+  spellNameText: {fileID: 0}
+  spellDescriptionText: {fileID: 0}
+  spellImage: {fileID: 0}
+  potionGridParent: {fileID: 0}
+  potionSlotPrefab: {fileID: 2242779106334818007, guid: dde8b6c8cf4980546bf2fa4b84a8ace9, type: 3}
+  spellPages:
+  - spellID: Ice
+    spellName: Ice Spell
+    description: 'A powerful element to be harnessed by the magically attuned.
+
+      This
+      spell casts a freezing flurry that explodes upon contact with any obstacle
+      in its path.
+
+
+      -Freezes afflicted creatures, slowing them down
+
+      -Extinguishes
+      burning creatures
+
+      -Freezes up any toxins within the bodies of afflicted
+      creatures
+
+'
+    spellSprite: {fileID: 1613871845, guid: ee717cc38342bbc44a7391d171904fe0, type: 3}
+  - spellID: Poison
+    spellName: Poison Spell
+    description: 'A powerful element to be harnessed by the magically attuned.
+
+      This
+      spell casts a toxic blast that explodes upon contact with any obstacle in its
+      path.
+
+
+      -Poisons afflicted creatures
+
+      -Deals extra damage to singed
+      creatures
+
+      -Toxins spread faster through frigid bodies
+
+'
+    spellSprite: {fileID: -53465938, guid: 1c66a5358c5b6bb49955ed28192dfcda, type: 3}
+  - spellID: Fire
+    spellName: Fire Spell
+    description: 'A powerful element to be harnessed by the magically attuned.
+
+      This
+      spell casts a large fireball that explodes upon contact with any obstacle in
+      its path.
+
+
+      -Leaves afflicted creatures burning
+
+      -Will thaw frozen
+      creatures
+
+      -Will burn up any toxins within the bodies of afflicted creatures
+
+'
+    spellSprite: {fileID: 1634123405, guid: 45102f9c09326a84e9674dbd59afbb27, type: 3}
+  allPotions:
+  - potionID: Health
+    potionName: Health Potion
+    potionDescription: 'A special mixture with healing properties.
+
+      -Restores
+      a minor amount of health
+
+'
+    potionSprite: {fileID: -1331519450, guid: 4bc55881e93ccec4fb843eff8e702bd6, type: 3}
+  - potionID: Mana
+    potionName: Mana Potion
+    potionDescription: 'A special mixture containing pure magic.
+
+      -Restores
+      a minor amount of mana
+
+'
+    potionSprite: {fileID: -304632549, guid: 619c5246c649be647b7acc5b99263718, type: 3}
+  - potionID: Speed
+    potionName: Speed Potion
+    potionDescription: 'A special mixture constantly moving within its bottle.
+
+      -Temporarily
+      boosts the users speed
+
+'
+    potionSprite: {fileID: 337749657, guid: 3cffda6bfe1d8eb47bbf8943ebceea69, type: 3}

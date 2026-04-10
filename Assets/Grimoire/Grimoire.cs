@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GrimoireUI : MonoBehaviour
 {
@@ -12,16 +12,18 @@ public class GrimoireUI : MonoBehaviour
     [Header("Grimoire Icon (HUD)")]
     public GameObject grimoireIcon;
     public Image grimoireIconImage;
-    public Sprite iconNormal;
-    public Sprite iconNotification;
+    public Sprite iconDefault;
+    public Sprite iconNotification1;
+    public Sprite iconNotification2;
+    public float iconFlashInterval = 0.5f;
 
     [Header("Navigation Arrows")]
     public Button leftArrowButton;
     public Button rightArrowButton;
 
     [Header("Left Page (Text)")]
-    public TMP_Text spellNameText;
-    public TMP_Text spellDescriptionText;
+    public TextMeshProUGUI spellNameText;
+    public TextMeshProUGUI spellDescriptionText;
 
     [Header("Right Page (Image)")]
     public Image spellImage;
@@ -39,12 +41,16 @@ public class GrimoireUI : MonoBehaviour
     private int currentPageIndex = 0;
     private bool isOpen = false;
     private bool hasNewUnlock = false;
+    private float iconFlashTimer;
+    private bool iconFlashState;
 
     private HashSet<string> unlockedSpells = new HashSet<string>();
     private HashSet<string> unlockedPotions = new HashSet<string>();
     private List<PageContent> activePages = new List<PageContent>();
 
     public static GrimoireUI Instance { get; private set; }
+
+
 
     private void Awake()
     {
@@ -62,6 +68,17 @@ public class GrimoireUI : MonoBehaviour
 
     private void Update()
     {
+        if (hasNewUnlock && grimoireIconImage != null)
+        {
+            iconFlashTimer -= Time.unscaledDeltaTime;
+            if (iconFlashTimer <= 0f)
+            {
+                iconFlashTimer = iconFlashInterval;
+                iconFlashState = !iconFlashState;
+                grimoireIconImage.sprite = iconFlashState ? iconNotification1 : iconNotification2;
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.B))
         {
             ToggleGrimoire();
@@ -162,7 +179,16 @@ public class GrimoireUI : MonoBehaviour
         else
         {
             spellNameText.text = page.title;
-            spellDescriptionText.text = page.description;
+
+            string potionDescriptions = "";
+            foreach (PotionData potion in allPotions)
+            {
+                if (unlockedPotions.Contains(potion.potionID))
+                {
+                    potionDescriptions += potion.potionName + "\n" + potion.potionDescription + "\n\n";
+                }
+            }
+            spellDescriptionText.text = potionDescriptions.TrimEnd();
 
             spellImage.gameObject.SetActive(false);
             potionGridParent.gameObject.SetActive(true);
@@ -189,7 +215,7 @@ public class GrimoireUI : MonoBehaviour
                     slotImage.sprite = potion.potionSprite;
                 }
 
-                Text slotText = slot.GetComponentInChildren<Text>();
+                TextMeshProUGUI slotText = slot.GetComponentInChildren<TextMeshProUGUI>();
                 if (slotText != null)
                 {
                     slotText.text = potion.potionName;
@@ -255,7 +281,16 @@ public class GrimoireUI : MonoBehaviour
     {
         if (grimoireIconImage == null) return;
 
-        grimoireIconImage.sprite = hasNewUnlock ? iconNotification : iconNormal;
+        if (hasNewUnlock)
+        {
+            iconFlashTimer = iconFlashInterval;
+            iconFlashState = true;
+            grimoireIconImage.sprite = iconNotification1;
+        }
+        else
+        {
+            grimoireIconImage.sprite = iconDefault;
+        }
     }
 }
 
@@ -274,6 +309,8 @@ public class PotionData
 {
     public string potionID;
     public string potionName;
+    [TextArea(3, 6)]
+    public string potionDescription;
     public Sprite potionSprite;
 }
 

@@ -62,7 +62,6 @@ public class ShotScript : MonoBehaviour
 
         if (collision.gameObject.layer == _enemyLayer)
         {
-            // Check if hit enemy is on fire — trigger AOE explosion
             SpellEffectReceiver hitReceiver = collision.gameObject.GetComponent<SpellEffectReceiver>();
             if (hitReceiver != null && hitReceiver.GetCurrentEffect() == SpellEffectReceiver.SpellType.Fire)
             {
@@ -70,7 +69,6 @@ public class ShotScript : MonoBehaviour
             }
             else
             {
-                // Normal AoE
                 if (AoE)
                 {
                     Collider[] hits = new Collider[20];
@@ -191,6 +189,14 @@ public class ShotScript : MonoBehaviour
             if (caster != null)
             {
                 caster.TakeDamage();
+            }
+        }
+        else if (enemy.CompareTag("CasterBoss"))
+        {
+            CasterBoss boss = enemy.GetComponent<CasterBoss>();
+            if (boss != null)
+            {
+                boss.TakeDamage(finalDmg);
             }
         }
         else

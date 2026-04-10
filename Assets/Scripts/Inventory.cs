@@ -201,6 +201,19 @@ public class Inventory : MonoBehaviour
         {
             RefreshActiveSlot();
         }
+
+        if (GrimoireUI.Instance != null)
+        {
+            if (item.itemName == "Fire" || item.itemName == "Ice" || item.itemName == "Poison")
+            {
+                GrimoireUI.Instance.UnlockSpell(item.itemName);
+            }
+
+            if (item.itemName == "Health" || item.itemName == "Speed")
+            {
+                GrimoireUI.Instance.UnlockPotion(item.itemName);
+            }
+        }
     }
 
     public void ConsumeItem(string type)

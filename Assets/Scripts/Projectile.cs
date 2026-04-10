@@ -17,6 +17,7 @@ public class Projectile : MonoBehaviour
     float chargePercent = 0f;
     public Animator BowAnim;
     public GameObject Arrow;
+    public Inventory inventory;
 
     [Header("Crosshair")]
     public Transform crosshairTransform;
@@ -33,6 +34,11 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
+        if (Inventory.IsDragging || (inventory != null && inventory.IsInventoryOpen()))
+        {
+            return;
+        }
+
         if (_isChargingLaunch)
         {
             HandleChargingMode();
